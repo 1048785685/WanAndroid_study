@@ -1,0 +1,36 @@
+ext {
+    android = [
+            compileSdkVersion       : 27,
+            buildToolsVersion       : "27.0.0",
+            minSdkVersion           : 21,
+            targetSdkVersion        : 27,
+            versionCode             : 8,
+            versionName             : "1.2.4",
+            renderscriptTargetApi   : 21
+    ]
+
+    version = [
+            supportLibraryVersion   : "28.0.0",
+            smartrefreshVersion     : "1.1.0-alpha-14",
+            okhttpVersion           : "3.9.0",
+            retrofitVersion         : "2.3.0",
+            glideVersion            : "4.0.0",
+            daggerVersion           : "2.15",
+            butterknifeVersion      : "8.8.1",
+            fragmentationVersion    : "1.1.9",
+            leakcanaryVersion       : "1.6.2"
+    ]
+
+    dependencies = [
+            //base
+            "appcompat-v7"                      : "com.android.support:appcompat-v7:${version["supportLibraryVersion"]}",
+            "support-v4"                        : "com.android.support:support-v4:${version["supportLibraryVersion"]}",
+            "design"                            : "com.android.support:design:${version["supportLibraryVersion"]}",
+            "constraint-layout"                 : "com.android.support.constraint:constraint-layout:1.0.2",
+
+            //ui
+            "SmartRefreshLayout"                :"com.scwang.smartrefresh:SmartRefreshLayout:${version["smartrefreshVersion"]}",
+            "SmartRefreshHeader"                : "com.scwang.smartrefresh:SmartRefreshHeader:${version["smartrefreshVersion"]}",
+            "banner"                            : "com.youth.banner:banner:1.4.10",
+    ]
+}

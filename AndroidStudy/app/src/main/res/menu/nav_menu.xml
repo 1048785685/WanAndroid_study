@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+ <group android:id="@+id/g1">
+     <item
+         android:id="@+id/nav_item_Study"
+         android:title="Study"
+         android:icon="@drawable/ic_study"
+         />
+     <item
+         android:id="@+id/nav_item_collect"
+         android:title="收藏"
+         android:icon="@drawable/icon_like"
+         />
+     <item
+         android:id="@+id/nav_item_setting"
+         android:title="设置"
+         android:icon="@drawable/ic_setting"
+         />
+     <item
+         android:id="@+id/nav_item_about"
+         android:title="关于我们"
+         android:icon="@drawable/ic_about"
+         />
+ </group>
+</menu>
