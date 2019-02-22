@@ -32,5 +32,14 @@ ext {
             "SmartRefreshLayout"                :"com.scwang.smartrefresh:SmartRefreshLayout:${version["smartrefreshVersion"]}",
             "SmartRefreshHeader"                : "com.scwang.smartrefresh:SmartRefreshHeader:${version["smartrefreshVersion"]}",
             "banner"                            : "com.youth.banner:banner:1.4.10",
+
+            //net
+            "glide"                             : "com.github.bumptech.glide:glide:${version["glideVersion"]}",
+
+            //状态栏
+            "systembartint"                 :"com.readystatesoftware.systembartint:systembartint:1.0.3",
+
+            "butterknife"                       : "com.jakewharton:butterknife:${version["butterknifeVersion"]}",
+            "butterknife-compiler"              : "com.jakewharton:butterknife-compiler:${version["butterknifeVersion"]}",
     ]
 }

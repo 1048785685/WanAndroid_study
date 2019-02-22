@@ -31,4 +31,14 @@ dependencies {
     implementation rootProject.ext.dependencies["SmartRefreshLayout"]
     implementation rootProject.ext.dependencies["SmartRefreshHeader"]
     implementation rootProject.ext.dependencies["banner"]
+
+    //net
+    implementation rootProject.ext.dependencies["glide"]
+
+    
+    //状态栏
+    implementation rootProject.ext.dependencies["systembartint"]
+
+    implementation rootProject.ext.dependencies["butterknife"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
 }

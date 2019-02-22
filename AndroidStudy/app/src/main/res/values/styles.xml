@@ -14,4 +14,5 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 </resources>
