@@ -1,4 +1,5 @@
-package com.example.liuyang05_sx.androidstudy.ui.fragment;
+package com.example.liuyang05_sx.androidstudy.ui.main.fragment;
+
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.liuyang05_sx.androidstudy.R;
 import com.example.liuyang05_sx.androidstudy.base.fragment.BaseFragment;
-import com.example.liuyang05_sx.androidstudy.ui.adapter.MainRecyclerAdapter;
+import com.example.liuyang05_sx.androidstudy.ui.main.adapter.MainRecyclerAdapter;
 import com.example.liuyang05_sx.androidstudy.utils.DividerItemDecoration;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -28,6 +29,7 @@ public class MainFragment extends BaseFragment {
     RecyclerView main_recyclerView;
     @BindView(R.id.refreshLayout)
     RefreshLayout refreshLayout;
+
     private View view;
     private MainRecyclerAdapter mainRecyclerAdapter;
     @Nullable
@@ -38,6 +40,8 @@ public class MainFragment extends BaseFragment {
         initRecyclerView();
         return view;
     }
+
+
 
     private void initRecyclerView(){
         main_recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(),DividerItemDecoration.VERTICAL_LIST));

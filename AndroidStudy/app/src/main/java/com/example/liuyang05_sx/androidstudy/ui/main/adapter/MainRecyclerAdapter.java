@@ -1,4 +1,4 @@
-package com.example.liuyang05_sx.androidstudy.ui.adapter;
+package com.example.liuyang05_sx.androidstudy.ui.main.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.liuyang05_sx.androidstudy.R;
 import com.example.liuyang05_sx.androidstudy.utils.GlideImageLoader;
 import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 
 import java.util.ArrayList;
@@ -52,12 +52,12 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         title.add("兄弟，要不要挑个项目学习下?");
         title.add("我们新增了一个常用导航Tab");
         if (viewHolder instanceof BannerViewHolder){
-            ((BannerViewHolder) viewHolder).banner.setImageLoader(new GlideImageLoader());
-            ((BannerViewHolder) viewHolder).banner.setImages(image)
+            ((BannerViewHolder) viewHolder).banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
+            .setImageLoader(new GlideImageLoader()).setImages(image)
             .setBannerAnimation(Transformer.DepthPage)
             .setBannerTitles(title)
             .isAutoPlay(true)
-            .setDelayTime(1000)
+            .setDelayTime(2000)
             .start();
         }else if (viewHolder instanceof ViewHolder){
             ((ViewHolder)viewHolder).main_item_author.setText("作者");
@@ -71,7 +71,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 18;
     }
 
     @Override
@@ -100,18 +100,16 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             super(itemView);
             ButterKnife.bind(this,itemView);
             if (onRecyclerViewListener!=null){
-                main_item_like.setOnClickListener(new View.OnClickListener() {
+                main_item_like.setOnClickListener(new View.OnClickListener(){
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View v){
                         onRecyclerViewListener.onLikeClick(v);
-//                        Toast.makeText(mContext,"点击收藏按钮",Toast.LENGTH_SHORT);
                     }
                 });
-                itemView.setOnClickListener(new View.OnClickListener() {
+                itemView.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
                         onRecyclerViewListener.onItemClick(v);
-//                        Toast.makeText(mContext,"点击item",Toast.LENGTH_SHORT);
                     }
                 });
             }

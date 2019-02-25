@@ -24,6 +24,7 @@ dependencies {
 
     //base
     implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["cardview-v7"]
     implementation rootProject.ext.dependencies["design"]
     implementation rootProject.ext.dependencies["constraint-layout"]
 
@@ -38,7 +39,9 @@ dependencies {
     
     //状态栏
     implementation rootProject.ext.dependencies["systembartint"]
-
+    //注入，绑定
     implementation rootProject.ext.dependencies["butterknife"]
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    //other
+    implementation rootProject.ext.dependencies["ByeBurger"]
 }

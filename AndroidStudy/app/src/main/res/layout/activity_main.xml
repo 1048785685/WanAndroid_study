@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/mdrawerLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -25,9 +26,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:elevation="16dp"
+            app:labelVisibilityMode="labeled"
             app:itemIconTint="@drawable/nav_item_icon_color"
             app:itemTextColor="@drawable/nav_item_icon_color"
             app:menu="@menu/bottom_menu"
+            app:layout_behavior="@string/bye_burger_bottom_behavior"
             />
     </android.support.design.widget.CoordinatorLayout>
     <android.support.design.widget.NavigationView
@@ -38,6 +41,8 @@
         android:background="@color/drawer_item_bg_n"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/nav_menu"
+        app:itemIconTint="@drawable/nav_item_icon_color"
+        app:itemTextColor="@drawable/nav_item_icon_color"
         />
 
 </android.support.v4.widget.DrawerLayout>
