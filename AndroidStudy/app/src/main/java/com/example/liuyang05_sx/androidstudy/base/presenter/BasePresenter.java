@@ -14,7 +14,7 @@ public class BasePresenter<T extends AbstractView> implements AbstractPresenter<
     public void detachView() {
         mMvpView=null;
     }
-    public T getmMvpView(){
+    public T getMvpView(){
         return mMvpView;
     }
 }

@@ -6,7 +6,7 @@ import com.example.liuyang05_sx.androidstudy.base.presenter.AbstractPresenter;
 import com.example.liuyang05_sx.androidstudy.base.view.AbstractView;
 
 
-public class BaseFragment<T extends AbstractPresenter> extends Fragment implements AbstractView {
+public class BaseFragment extends Fragment implements AbstractView {
     @Override
     public void startLoading() {
 

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.liuyang05_sx.androidstudy.R;
+import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 import com.example.liuyang05_sx.androidstudy.utils.GlideImageLoader;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -28,8 +29,11 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private final int other_Item = 1;
     private List<String> title = new ArrayList<>();
     private List<String> image = new ArrayList<>();
-    public MainRecyclerAdapter(Context context){
+    private List<String> url = new ArrayList<>();
+    private List<Main_Banner> mData;
+    public MainRecyclerAdapter(Context context,List<Main_Banner> lists){
         mContext = context;
+        mData = lists;
     }
     @NonNull
     @Override
@@ -45,12 +49,11 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        image.add("http://www.wanandroid.com/blogimgs/ab17e8f9-6b79-450b-8079-0f2287eb6f0f.png");
-        image.add("http://www.wanandroid.com/blogimgs/fb0ea461-e00a-482b-814f-4faca5761427.png");
-        image.add("http://www.wanandroid.com/blogimgs/62c1bd68-b5f3-4a3c-a649-7ca8c7dfabe6.png");
-        title.add("看看别人的面经，搞定面试~");
-        title.add("兄弟，要不要挑个项目学习下?");
-        title.add("我们新增了一个常用导航Tab");
+        for (Main_Banner banner_data : mData){
+            image.add(banner_data.getImagePath());
+            title.add(banner_data.getTitle());
+            url.add(banner_data.getUrl());
+        }
         if (viewHolder instanceof BannerViewHolder){
             ((BannerViewHolder) viewHolder).banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
             .setImageLoader(new GlideImageLoader()).setImages(image)
@@ -126,6 +129,17 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
         }
     }
+
+
+    public void replaceData(List<Main_Banner> list){
+        mData.clear();
+        mData.addAll(list);
+        notifyDataSetChanged();
+    }
+    public void addData(List<Main_Banner> list){
+        mData.addAll(list);
+        notifyDataSetChanged();
+    }
     public interface OnRecyclerViewListener{
         void onItemClick(View view);
         void onLikeClick(View view);
@@ -133,4 +147,5 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void setOnRecycleViewListener(OnRecyclerViewListener itemClickListener){
         this.onRecyclerViewListener = itemClickListener;
     }
+
 }

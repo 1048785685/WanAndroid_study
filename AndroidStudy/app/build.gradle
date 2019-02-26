@@ -34,7 +34,18 @@ dependencies {
     implementation rootProject.ext.dependencies["banner"]
 
     //net
+    implementation rootProject.ext.dependencies["gson"]
+    implementation rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["logging-interceptor"]
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["converter-gson"]
+    implementation rootProject.ext.dependencies["adapter-rxjava2"]
     implementation rootProject.ext.dependencies["glide"]
+    annotationProcessor rootProject.ext.dependencies["glide_compiler"]
+
+    //rx
+    implementation rootProject.ext.dependencies["rxjava"]
+    implementation rootProject.ext.dependencies["rxandroid"]
 
     
     //状态栏
@@ -44,4 +55,6 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
     //other
     implementation rootProject.ext.dependencies["ByeBurger"]
+    implementation rootProject.ext.dependencies["stetho"]
+    implementation rootProject.ext.dependencies["stetho-okhttp3"]
 }
