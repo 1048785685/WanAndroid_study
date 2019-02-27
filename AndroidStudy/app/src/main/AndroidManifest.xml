@@ -16,6 +16,7 @@
         <activity
             android:name="com.example.liuyang05_sx.androidstudy.ui.main.activity.MainActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +28,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             />
+        <activity android:name=".ui.main.activity.WebActivity"/>
+        <activity android:name=".ui.main.activity.LoginActivity"
+            android:launchMode="singleTask"/>
+
+
     </application>
 
 </manifest>

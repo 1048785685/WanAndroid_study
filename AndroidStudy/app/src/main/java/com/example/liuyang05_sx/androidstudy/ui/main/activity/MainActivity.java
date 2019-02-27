@@ -1,5 +1,6 @@
 package com.example.liuyang05_sx.androidstudy.ui.main.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,8 +10,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -23,6 +26,7 @@ import com.example.liuyang05_sx.androidstudy.base.fragment.BaseFragment;
 import com.example.liuyang05_sx.androidstudy.ui.knowledge.Knowledge_Fragment;
 import com.example.liuyang05_sx.androidstudy.ui.main.fragment.MainFragment;
 import com.example.liuyang05_sx.androidstudy.utils.BottomNavigationViewHelper;
+import com.example.liuyang05_sx.androidstudy.utils.StatusBarUtil;
 
 import java.util.ArrayList;
 
@@ -68,22 +72,28 @@ public class MainActivity extends BaseActivity {
 
 
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        StatusBarUtil.setStatusColor(getWindow(), ContextCompat.getColor(this, R.color.main_status_bar_blue), 1f);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDrawerLayout.openDrawer(GravityCompat.START);
-                Log.d("xxx","dianji nav_icon");
+
             }
         });
 
 
 
-        View headView = mNav_view.getHeaderView(0);
-        headView.setOnClickListener(new View.OnClickListener() {
+        TextView textView = mNav_view.getHeaderView(0).findViewById(R.id.login_in);
+
+        textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("xxx","yes");
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
             }
         });
 

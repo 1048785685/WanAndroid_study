@@ -3,6 +3,7 @@ package com.example.liuyang05_sx.androidstudy.ui.main.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.liuyang05_sx.androidstudy.R;
+import com.example.liuyang05_sx.androidstudy.bean.main.Data;
+import com.example.liuyang05_sx.androidstudy.bean.main.Data_;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 import com.example.liuyang05_sx.androidstudy.utils.GlideImageLoader;
+import com.example.liuyang05_sx.androidstudy.utils.Time;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +36,12 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private List<String> image = new ArrayList<>();
     private List<String> url = new ArrayList<>();
     private List<Main_Banner> mData;
-    public MainRecyclerAdapter(Context context,List<Main_Banner> lists){
+    private List<Data_>  mMainData;
+    private Banner mBanner;
+    public MainRecyclerAdapter(Context context,List<Main_Banner> lists,List<Data_> mMainData){
         mContext = context;
         mData = lists;
+        this.mMainData = mMainData;
     }
     @NonNull
     @Override
@@ -49,24 +57,29 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        for (Main_Banner banner_data : mData){
-            image.add(banner_data.getImagePath());
-            title.add(banner_data.getTitle());
-            url.add(banner_data.getUrl());
-        }
+
         if (viewHolder instanceof BannerViewHolder){
+            image.clear();
+            title.clear();
+            url.clear();
+            for (Main_Banner banner_data : mData){
+                image.add(banner_data.getImagePath());
+                title.add(banner_data.getTitle());
+                url.add(banner_data.getUrl());
+            }
+            mBanner=((BannerViewHolder) viewHolder).banner;
             ((BannerViewHolder) viewHolder).banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
-            .setImageLoader(new GlideImageLoader()).setImages(image)
-            .setBannerAnimation(Transformer.DepthPage)
-            .setBannerTitles(title)
-            .isAutoPlay(true)
-            .setDelayTime(2000)
-            .start();
+                    .setImageLoader(new GlideImageLoader()).setImages(image)
+                    .setBannerAnimation(Transformer.DepthPage)
+                    .setBannerTitles(title)
+                    .isAutoPlay(true)
+                    .setDelayTime(2000)
+                    .start();
         }else if (viewHolder instanceof ViewHolder){
-            ((ViewHolder)viewHolder).main_item_author.setText("作者");
-            ((ViewHolder)viewHolder).main_item_tag.setText("公众号、任玉刚");
-            ((ViewHolder)viewHolder).main_item_time.setText("一天之前");
-            ((ViewHolder)viewHolder).main_item_title.setText("Android学习指南");
+            ((ViewHolder)viewHolder).main_item_author.setText(mMainData.get(i).getAuthor());
+            ((ViewHolder)viewHolder).main_item_tag.setText(mMainData.get(i).getSuperChapterName()+"/"+mMainData.get(i).getChapterName());
+            ((ViewHolder)viewHolder).main_item_time.setText(Time.getTime("yyyy-MM-dd",mMainData.get(i).getPublishTime()));
+            ((ViewHolder)viewHolder).main_item_title.setText(mMainData.get(i).getTitle());
         }
     }
 
@@ -74,7 +87,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemCount() {
-        return 18;
+        return mMainData.size();
     }
 
     @Override
@@ -125,24 +138,29 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             super(itemView);
             ButterKnife.bind(this,itemView);
             if (onRecyclerViewListener!=null){
-
+                banner.setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void OnBannerClick(int position) {
+                        onRecyclerViewListener.onBannerClick(position);
+                    }
+                });
             }
         }
     }
 
-
-    public void replaceData(List<Main_Banner> list){
-        mData.clear();
-        mData.addAll(list);
+    public void replaceManiData(List<Data_> list){
+        mMainData = list;
         notifyDataSetChanged();
     }
-    public void addData(List<Main_Banner> list){
-        mData.addAll(list);
+
+    public void addData(List<Data_> list){
+        mMainData.addAll(list);
         notifyDataSetChanged();
     }
     public interface OnRecyclerViewListener{
         void onItemClick(View view);
         void onLikeClick(View view);
+        void onBannerClick(int position);
     }
     public void setOnRecycleViewListener(OnRecyclerViewListener itemClickListener){
         this.onRecyclerViewListener = itemClickListener;
