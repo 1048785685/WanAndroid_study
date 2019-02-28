@@ -29,9 +29,12 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             />
         <activity android:name=".ui.main.activity.WebActivity"/>
+
         <activity android:name=".ui.main.activity.LoginActivity"
             android:launchMode="singleTask"/>
 
+        <activity android:name=".ui.main.activity.RegisterActivity"
+            android:launchMode="singleTask"/>
 
     </application>
 

@@ -17,6 +17,7 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 public class AndroidStudy_Application extends Application {
     private static Context mContext;
+    public static String cacheDir = "";
     //static 代码段可以防止内存泄露, 全局设置刷新头部及尾部，优先级最低
     static {
         AppCompatDelegate.setDefaultNightMode(
@@ -36,6 +37,14 @@ public class AndroidStudy_Application extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        /**
+         * 如果存在SD卡则将缓存写入SD卡,否则写入手机内存
+         */
+        if (getApplicationContext().getExternalCacheDir() != null) {
+            cacheDir = getApplicationContext().getExternalCacheDir().toString();
+        } else {
+            cacheDir = getApplicationContext().getCacheDir().toString();
+        }
     }
     public static Context getContext(){
         return  mContext;

@@ -2,6 +2,7 @@ package com.example.liuyang05_sx.androidstudy.http;
 
 import com.example.liuyang05_sx.androidstudy.bean.BaseResult;
 import com.example.liuyang05_sx.androidstudy.bean.main.Data;
+import com.example.liuyang05_sx.androidstudy.bean.main.LoginData;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 
 import java.util.List;
@@ -19,5 +20,10 @@ public class HttpHelperImp implements HttpHelper{
     @Override
     public Observable<BaseResult<Data>> getMainData(int page) {
         return retrofitSingleton.getApiService().getMainData(page);
+    }
+
+    @Override
+    public Observable<BaseResult<LoginData>> Login_in(String username, String password) {
+        return retrofitSingleton.getApiService().Login_in(username,password);
     }
 }

@@ -2,12 +2,16 @@ package com.example.liuyang05_sx.androidstudy.http.Api;
 
 import com.example.liuyang05_sx.androidstudy.bean.BaseResult;
 import com.example.liuyang05_sx.androidstudy.bean.main.Data;
+import com.example.liuyang05_sx.androidstudy.bean.main.LoginData;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -22,4 +26,11 @@ public interface ApiInterface {
      */
     @GET("article/list/{page}/json")
     Observable<BaseResult<Data>> getMainData(@Path("page") int page);
+    /*
+    登录
+     */
+    @POST("user/login")
+    @FormUrlEncoded
+    Observable<BaseResult<LoginData>> Login_in(@Field("username") String username
+            ,@Field("password") String password);
 }

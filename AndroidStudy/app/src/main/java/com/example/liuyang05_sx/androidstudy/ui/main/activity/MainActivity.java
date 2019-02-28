@@ -1,5 +1,6 @@
 package com.example.liuyang05_sx.androidstudy.ui.main.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
@@ -23,15 +24,22 @@ import android.widget.TextView;
 import com.example.liuyang05_sx.androidstudy.R;
 import com.example.liuyang05_sx.androidstudy.base.BaseActivity;
 import com.example.liuyang05_sx.androidstudy.base.fragment.BaseFragment;
+import com.example.liuyang05_sx.androidstudy.bean.event.LoginEvent;
 import com.example.liuyang05_sx.androidstudy.ui.knowledge.Knowledge_Fragment;
 import com.example.liuyang05_sx.androidstudy.ui.main.fragment.MainFragment;
 import com.example.liuyang05_sx.androidstudy.utils.BottomNavigationViewHelper;
+import com.example.liuyang05_sx.androidstudy.utils.RxBus;
 import com.example.liuyang05_sx.androidstudy.utils.StatusBarUtil;
+
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity {
 
@@ -39,7 +47,6 @@ public class MainActivity extends BaseActivity {
     private Fragment currentFragment = new Fragment();
     private MainFragment mainFragment = new MainFragment();
     private Knowledge_Fragment knowledge_fragment = new Knowledge_Fragment();
-
     @BindView(R.id.main_bottom)
     BottomNavigationView mBottomNavigationView;
     @BindView(R.id.common_title)
@@ -52,14 +59,38 @@ public class MainActivity extends BaseActivity {
     TextView mSearch;
     @BindView(R.id.mdrawerLayout)
     DrawerLayout mDrawerLayout;
+
+    private TextView textView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        registerEvent();
         initBottomNavigationView();
         initFragment();
         initNavgationView();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @SuppressLint("CheckResult")
+    private void registerEvent() {
+        RxBus.getDefault().toObservable(this,LoginEvent.class).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<LoginEvent>() {
+                    @Override
+                    public void accept(LoginEvent loginEvent) throws Exception {
+                     Log.d("xxx","发送成功");
+                        textView.setText(loginEvent.getUsername());
+                        textView.setClickable(false);
+                        mNav_view.getMenu().getItem(4).setVisible(true);
+                    }
+                });
     }
 
     private void initNavgationView() {
@@ -86,7 +117,7 @@ public class MainActivity extends BaseActivity {
 
 
 
-        TextView textView = mNav_view.getHeaderView(0).findViewById(R.id.login_in);
+        textView = mNav_view.getHeaderView(0).findViewById(R.id.login_in);
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +151,8 @@ public class MainActivity extends BaseActivity {
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
                         Log.d("xxx","about");
+                        break;
+                    case R.id.nav_item_loginout:
                         break;
                 }
 
@@ -160,6 +193,8 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
+
 
     private void initFragment() {
         mFragments.add(mainFragment);

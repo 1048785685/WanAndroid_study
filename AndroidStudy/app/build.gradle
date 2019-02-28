@@ -50,7 +50,7 @@ dependencies {
     //rx
     implementation rootProject.ext.dependencies["rxjava"]
     implementation rootProject.ext.dependencies["rxandroid"]
-
+    implementation rootProject.ext.dependencies["rxlifecycle-android-lifecycle"]
     
     //状态栏
     implementation rootProject.ext.dependencies["systembartint"]

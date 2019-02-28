@@ -2,6 +2,7 @@ package com.example.liuyang05_sx.androidstudy.http;
 
 import com.example.liuyang05_sx.androidstudy.bean.BaseResult;
 import com.example.liuyang05_sx.androidstudy.bean.main.Data;
+import com.example.liuyang05_sx.androidstudy.bean.main.LoginData;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface HttpHelper {
     首页文章数据
      */
     Observable<BaseResult<Data>> getMainData(int page);
+    /*
+    登录
+    */
+    Observable<BaseResult<LoginData>> Login_in(String username, String password);
 }
