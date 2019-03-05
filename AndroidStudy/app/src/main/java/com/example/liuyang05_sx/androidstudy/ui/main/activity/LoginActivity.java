@@ -56,6 +56,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     private void init() {
+
         setSupportActionBar(login_toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         login_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -110,8 +111,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     public void onNext(BaseResult<LoginData> loginDataBaseResult) {
                         if (loginDataBaseResult.getErrorCode()==0){
                             RxBus.getDefault().post(new LoginEvent(true,loginDataBaseResult.getData().getUsername()));
-                            ACache.getDefault().put(C.UserName,loginDataBaseResult.getData().getUsername());
-                            ACache.getDefault().put(C.PassWord,loginDataBaseResult.getData().getPassword());
+                            ACache.get(LoginActivity.this).put(C.UserName,loginDataBaseResult.getData().getUsername());
+                            ACache.get(LoginActivity.this).put(C.PassWord,loginDataBaseResult.getData().getPassword());
                             finish();
                         }else {
                             Toast.makeText(LoginActivity.this,loginDataBaseResult.getErrorMsg(),Toast.LENGTH_SHORT).show();

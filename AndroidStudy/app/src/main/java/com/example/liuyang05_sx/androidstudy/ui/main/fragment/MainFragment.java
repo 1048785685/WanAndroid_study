@@ -66,8 +66,12 @@ public class MainFragment extends BaseFragment implements IBannerView{
         main_recyclerView.setAdapter(mainRecyclerAdapter);
         mainRecyclerAdapter.setOnRecycleViewListener(new MainRecyclerAdapter.OnRecyclerViewListener() {
             @Override
-            public void onItemClick(View view) {
-                Toast.makeText(view.getContext(),"点击Item按钮",Toast.LENGTH_SHORT).show();
+            public void onItemClick(String url,String title) {
+                Intent intent = new Intent();
+                intent.putExtra("title",title);
+                intent.putExtra("url",url);
+                intent.setClass(view.getContext(),WebActivity.class);
+                startActivity(intent);
             }
 
             @Override
@@ -76,10 +80,10 @@ public class MainFragment extends BaseFragment implements IBannerView{
             }
 
             @Override
-            public void onBannerClick(int position) {
+            public void onBannerClick(String url,String title) {
                 Intent intent = new Intent();
-                intent.putExtra("title",Banner_list.get(position).getTitle());
-                intent.putExtra("url",Banner_list.get(position).getUrl());
+                intent.putExtra("title",title);
+                intent.putExtra("url",url);
                 intent.setClass(view.getContext(),WebActivity.class);
                 startActivity(intent);
             }
@@ -111,7 +115,7 @@ public class MainFragment extends BaseFragment implements IBannerView{
             flag++;
             initRecyclerView();
         }else {
-        mainRecyclerAdapter.replaceManiData(Main_list);
+            mainRecyclerAdapter.replaceManiData(Main_list);
         }
         this.page =page;
     }

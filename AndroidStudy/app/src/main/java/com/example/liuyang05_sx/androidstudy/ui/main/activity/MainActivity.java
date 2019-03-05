@@ -27,7 +27,9 @@ import com.example.liuyang05_sx.androidstudy.base.fragment.BaseFragment;
 import com.example.liuyang05_sx.androidstudy.bean.event.LoginEvent;
 import com.example.liuyang05_sx.androidstudy.ui.knowledge.Knowledge_Fragment;
 import com.example.liuyang05_sx.androidstudy.ui.main.fragment.MainFragment;
+import com.example.liuyang05_sx.androidstudy.utils.ACache;
 import com.example.liuyang05_sx.androidstudy.utils.BottomNavigationViewHelper;
+import com.example.liuyang05_sx.androidstudy.utils.C;
 import com.example.liuyang05_sx.androidstudy.utils.RxBus;
 import com.example.liuyang05_sx.androidstudy.utils.StatusBarUtil;
 
@@ -69,6 +71,10 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         registerEvent();
         initBottomNavigationView();
+
+//        if (ACache.getDefault().getAsString(C.UserName)!=null){
+//            Log.d("xxx","111111");
+//        }
         initFragment();
         initNavgationView();
     }

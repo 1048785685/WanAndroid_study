@@ -33,4 +33,11 @@ public interface ApiInterface {
     @FormUrlEncoded
     Observable<BaseResult<LoginData>> Login_in(@Field("username") String username
             ,@Field("password") String password);
+    /*
+    注册
+     */
+    @POST("user/register")
+    @FormUrlEncoded
+    Observable<BaseResult> Register(@Field("username") String username
+            ,@Field("password") String password,@Field("repassword") String repassword);
 }

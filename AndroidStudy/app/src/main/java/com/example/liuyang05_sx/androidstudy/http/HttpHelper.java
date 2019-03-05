@@ -23,4 +23,8 @@ public interface HttpHelper {
     登录
     */
     Observable<BaseResult<LoginData>> Login_in(String username, String password);
+    /*
+    注册
+     */
+    Observable<BaseResult> Register(String username,String password,String repassword);
 }

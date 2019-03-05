@@ -67,7 +67,6 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 title.add(banner_data.getTitle());
                 url.add(banner_data.getUrl());
             }
-            mBanner=((BannerViewHolder) viewHolder).banner;
             ((BannerViewHolder) viewHolder).banner.setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
                     .setImageLoader(new GlideImageLoader()).setImages(image)
                     .setBannerAnimation(Transformer.DepthPage)
@@ -125,7 +124,8 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 itemView.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-                        onRecyclerViewListener.onItemClick(v);
+                        onRecyclerViewListener.onItemClick(mMainData.get(getLayoutPosition()).getLink(),
+                                mMainData.get(getLayoutPosition()).getTitle());
                     }
                 });
             }
@@ -141,7 +141,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 banner.setOnBannerListener(new OnBannerListener() {
                     @Override
                     public void OnBannerClick(int position) {
-                        onRecyclerViewListener.onBannerClick(position);
+                        onRecyclerViewListener.onBannerClick(mData.get(position).getUrl(),mData.get(position).getTitle());
                     }
                 });
             }
@@ -158,9 +158,9 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         notifyDataSetChanged();
     }
     public interface OnRecyclerViewListener{
-        void onItemClick(View view);
+        void onItemClick(String url,String title);
         void onLikeClick(View view);
-        void onBannerClick(int position);
+        void onBannerClick(String url,String title);
     }
     public void setOnRecycleViewListener(OnRecyclerViewListener itemClickListener){
         this.onRecyclerViewListener = itemClickListener;

@@ -26,4 +26,9 @@ public class HttpHelperImp implements HttpHelper{
     public Observable<BaseResult<LoginData>> Login_in(String username, String password) {
         return retrofitSingleton.getApiService().Login_in(username,password);
     }
+
+    @Override
+    public Observable<BaseResult> Register(String username, String password, String repassword) {
+        return retrofitSingleton.getApiService().Register(username,password,repassword);
+    }
 }
