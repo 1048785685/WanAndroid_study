@@ -24,6 +24,10 @@ public interface HttpHelper {
     */
     Observable<BaseResult<LoginData>> Login_in(String username, String password);
     /*
+    退出
+     */
+    Observable<BaseResult> Login_out();
+    /*
     注册
      */
     Observable<BaseResult> Register(String username,String password,String repassword);

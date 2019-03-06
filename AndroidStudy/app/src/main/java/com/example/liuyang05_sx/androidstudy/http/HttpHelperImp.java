@@ -12,6 +12,7 @@ import io.reactivex.Observable;
 public class HttpHelperImp implements HttpHelper{
     public static HttpHelperImp httpHelperImp = new HttpHelperImp();
     private static RetrofitSingleton retrofitSingleton = RetrofitSingleton.getInstance();
+
     @Override
     public Observable<BaseResult<List<Main_Banner>>> getBannerData() {
         return retrofitSingleton.getApiService().getBannerData();
@@ -25,6 +26,11 @@ public class HttpHelperImp implements HttpHelper{
     @Override
     public Observable<BaseResult<LoginData>> Login_in(String username, String password) {
         return retrofitSingleton.getApiService().Login_in(username,password);
+    }
+
+    @Override
+    public Observable<BaseResult> Login_out() {
+        return retrofitSingleton.getApiService().Login_out();
     }
 
     @Override

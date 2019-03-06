@@ -24,7 +24,9 @@ import android.widget.TextView;
 import com.example.liuyang05_sx.androidstudy.R;
 import com.example.liuyang05_sx.androidstudy.base.BaseActivity;
 import com.example.liuyang05_sx.androidstudy.base.fragment.BaseFragment;
+import com.example.liuyang05_sx.androidstudy.bean.BaseResult;
 import com.example.liuyang05_sx.androidstudy.bean.event.LoginEvent;
+import com.example.liuyang05_sx.androidstudy.http.HttpHelperImp;
 import com.example.liuyang05_sx.androidstudy.ui.knowledge.Knowledge_Fragment;
 import com.example.liuyang05_sx.androidstudy.ui.main.fragment.MainFragment;
 import com.example.liuyang05_sx.androidstudy.utils.ACache;
@@ -38,7 +40,9 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 import io.reactivex.schedulers.Schedulers;
@@ -86,15 +90,21 @@ public class MainActivity extends BaseActivity {
 
     @SuppressLint("CheckResult")
     private void registerEvent() {
+
         RxBus.getDefault().toObservable(this,LoginEvent.class).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<LoginEvent>() {
                     @Override
                     public void accept(LoginEvent loginEvent) throws Exception {
-                     Log.d("xxx","发送成功");
-                        textView.setText(loginEvent.getUsername());
-                        textView.setClickable(false);
-                        mNav_view.getMenu().getItem(4).setVisible(true);
+                        if (loginEvent.isLogin()) {
+                            textView.setText(loginEvent.getUsername());
+                            textView.setClickable(false);
+                            mNav_view.getMenu().getItem(4).setVisible(true);
+                        }else if (!loginEvent.isLogin()){
+                            textView.setText("登录");
+                            textView.setClickable(true);
+                            mNav_view.getMenu().getItem(4).setVisible(false);
+                        }
                     }
                 });
     }
@@ -159,6 +169,7 @@ public class MainActivity extends BaseActivity {
                         Log.d("xxx","about");
                         break;
                     case R.id.nav_item_loginout:
+                        Login_out();
                         break;
                 }
 
@@ -166,7 +177,35 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+    public void Login_out(){
+        HttpHelperImp.httpHelperImp.Login_out()
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BaseResult>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
 
+                    }
+
+                    @Override
+                    public void onNext(BaseResult baseResult) {
+                        if (baseResult.getErrorCode()==0){
+                        RxBus.getDefault().post(new LoginEvent(false,""));
+                        ACache.get(MainActivity.this).put(C.UserName,"");
+                        ACache.get(MainActivity.this).put(C.PassWord,"");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
     private void switchFragment(String title,int position){
         mCommon_title.setText(title);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

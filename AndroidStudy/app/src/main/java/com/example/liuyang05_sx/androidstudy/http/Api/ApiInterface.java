@@ -34,10 +34,16 @@ public interface ApiInterface {
     Observable<BaseResult<LoginData>> Login_in(@Field("username") String username
             ,@Field("password") String password);
     /*
+    退出
+     */
+    @GET("user/logout/json")
+    Observable<BaseResult> Login_out();
+    /*
     注册
      */
     @POST("user/register")
     @FormUrlEncoded
     Observable<BaseResult> Register(@Field("username") String username
             ,@Field("password") String password,@Field("repassword") String repassword);
+
 }
