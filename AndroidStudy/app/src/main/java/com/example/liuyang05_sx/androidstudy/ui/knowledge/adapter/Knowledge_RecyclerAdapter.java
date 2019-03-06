@@ -10,6 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.liuyang05_sx.androidstudy.R;
+import com.example.liuyang05_sx.androidstudy.bean.knowledge.Child;
+import com.example.liuyang05_sx.androidstudy.bean.knowledge.Datum;
+import com.example.liuyang05_sx.androidstudy.utils.CommonUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,8 +23,10 @@ public class Knowledge_RecyclerAdapter extends RecyclerView.Adapter<Knowledge_Re
 
     private Context mContext;
     private OnRecyclerListener monRecyclerListener;
-    public Knowledge_RecyclerAdapter(Context context){
+    private List<Datum> list;
+    public Knowledge_RecyclerAdapter(Context context,List<Datum> data){
         mContext = context;
+        this.list = data;
     }
     @NonNull
     @Override
@@ -31,9 +38,14 @@ public class Knowledge_RecyclerAdapter extends RecyclerView.Adapter<Knowledge_Re
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        viewHolder.mKnowledge_content.setText("Android Studio相关   gradle  官方发布");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Child data: list.get(i).getChildren()) {
+            stringBuilder.append(data.getName()).append("   ");
+        }
+        viewHolder.mKnowledge_content.setText(stringBuilder.toString());
         viewHolder.mKnowledge_image.setImageResource(R.drawable.ic_toright);
-        viewHolder.mKnowledge_title.setText("开发环境");
+        viewHolder.mKnowledge_title.setText(list.get(i).getName());
+        viewHolder.mKnowledge_title.setTextColor(CommonUtil.randomColor());
         if (monRecyclerListener!=null){
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -46,7 +58,12 @@ public class Knowledge_RecyclerAdapter extends RecyclerView.Adapter<Knowledge_Re
 
     @Override
     public int getItemCount() {
-        return 13;
+        return list.size();
+    }
+
+    public void  refreshData(List<Datum> data){
+        this.list = data;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

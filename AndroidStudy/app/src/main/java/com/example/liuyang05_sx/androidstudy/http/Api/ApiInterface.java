@@ -1,6 +1,7 @@
 package com.example.liuyang05_sx.androidstudy.http.Api;
 
 import com.example.liuyang05_sx.androidstudy.bean.BaseResult;
+import com.example.liuyang05_sx.androidstudy.bean.knowledge.Datum;
 import com.example.liuyang05_sx.androidstudy.bean.main.Data;
 import com.example.liuyang05_sx.androidstudy.bean.main.LoginData;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
@@ -27,6 +28,11 @@ public interface ApiInterface {
     @GET("article/list/{page}/json")
     Observable<BaseResult<Data>> getMainData(@Path("page") int page);
     /*
+    知识体系数据
+    */
+    @GET("tree/json")
+    Observable<BaseResult<List<Datum>>> getTreeData();
+    /*
     登录
      */
     @POST("user/login")
@@ -45,5 +51,6 @@ public interface ApiInterface {
     @FormUrlEncoded
     Observable<BaseResult> Register(@Field("username") String username
             ,@Field("password") String password,@Field("repassword") String repassword);
+
 
 }

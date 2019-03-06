@@ -3,6 +3,7 @@ package com.example.liuyang05_sx.androidstudy.ui.main.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,7 +79,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder)viewHolder).main_item_author.setText(mMainData.get(i).getAuthor());
             ((ViewHolder)viewHolder).main_item_tag.setText(mMainData.get(i).getSuperChapterName()+"/"+mMainData.get(i).getChapterName());
             ((ViewHolder)viewHolder).main_item_time.setText(Time.getTime("yyyy-MM-dd",mMainData.get(i).getPublishTime()));
-            ((ViewHolder)viewHolder).main_item_title.setText(mMainData.get(i).getTitle());
+            ((ViewHolder)viewHolder).main_item_title.setText(Html.fromHtml(mMainData.get(i).getTitle()));
         }
     }
 
@@ -125,7 +126,8 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     @Override
                     public void onClick(View v) {
                         onRecyclerViewListener.onItemClick(mMainData.get(getLayoutPosition()).getLink(),
-                                mMainData.get(getLayoutPosition()).getTitle());
+                                String.valueOf(Html.fromHtml(mMainData.get(getLayoutPosition()).getTitle())));
+
                     }
                 });
             }

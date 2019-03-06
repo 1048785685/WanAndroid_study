@@ -108,7 +108,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     }
 
                     @Override
-                    public void onNext(BaseResult<LoginData> loginDataBaseResult) {
+                    public void onNext(BaseResult<LoginData> loginDataBaseResult){
                         if (loginDataBaseResult.getErrorCode()==0){
                             RxBus.getDefault().post(new LoginEvent(true,loginDataBaseResult.getData().getUsername()));
                             ACache.get(LoginActivity.this).put(C.UserName,loginDataBaseResult.getData().getUsername());
