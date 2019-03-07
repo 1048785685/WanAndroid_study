@@ -5,6 +5,7 @@ import com.example.liuyang05_sx.androidstudy.bean.knowledge.Datum;
 import com.example.liuyang05_sx.androidstudy.bean.main.Data;
 import com.example.liuyang05_sx.androidstudy.bean.main.LoginData;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
+import com.example.liuyang05_sx.androidstudy.bean.navigation.NavData;
 
 import java.util.List;
 
@@ -32,6 +33,11 @@ public interface ApiInterface {
     */
     @GET("tree/json")
     Observable<BaseResult<List<Datum>>> getTreeData();
+    /*
+    导航
+    */
+    @GET("navi/json")
+    Observable<BaseResult<List<NavData>>> getNaviData();
     /*
     登录
      */

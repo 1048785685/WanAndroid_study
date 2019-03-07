@@ -37,7 +37,7 @@ public class Knowledge_Fragment extends BaseFragment implements IKnow_View{
     private List<Datum> datumList = new ArrayList<>();
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         view = inflater.inflate(R.layout.fragment_knowledge,container,false);
         ButterKnife.bind(this,view);
         initRecyclerView();

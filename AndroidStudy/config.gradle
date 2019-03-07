@@ -33,6 +33,7 @@ ext {
             "SmartRefreshLayout"                :"com.scwang.smartrefresh:SmartRefreshLayout:${version["smartrefreshVersion"]}",
             "SmartRefreshHeader"                : "com.scwang.smartrefresh:SmartRefreshHeader:${version["smartrefreshVersion"]}",
             "banner"                            : "com.youth.banner:banner:1.4.10",
+            "VerticalTabLayout"                 : "q.rorbin:VerticalTabLayout:1.2.5",
 
             //net
             "gson"                              : "com.google.code.gson:gson:2.8.2",

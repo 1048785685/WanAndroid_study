@@ -33,7 +33,7 @@
             android:layout_toLeftOf="@+id/knowledge_image">
             <TextView
                 android:layout_marginTop="4dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="8dp"
                 android:id="@+id/knowledge_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                 android:textSize="16sp"
                 />
             <TextView
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="6dp"
                 android:id="@+id/knowledge_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

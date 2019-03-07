@@ -29,6 +29,7 @@ import com.example.liuyang05_sx.androidstudy.bean.event.LoginEvent;
 import com.example.liuyang05_sx.androidstudy.http.HttpHelperImp;
 import com.example.liuyang05_sx.androidstudy.ui.knowledge.Knowledge_Fragment;
 import com.example.liuyang05_sx.androidstudy.ui.main.fragment.MainFragment;
+import com.example.liuyang05_sx.androidstudy.ui.navigation.NavigationFragment;
 import com.example.liuyang05_sx.androidstudy.utils.ACache;
 import com.example.liuyang05_sx.androidstudy.utils.BottomNavigationViewHelper;
 import com.example.liuyang05_sx.androidstudy.utils.C;
@@ -52,6 +53,7 @@ public class MainActivity extends BaseActivity {
     private ArrayList<BaseFragment> mFragments = new ArrayList<>();
     private Fragment currentFragment = new Fragment();
     private MainFragment mainFragment = new MainFragment();
+    private NavigationFragment navigationFragment = new NavigationFragment();
     private Knowledge_Fragment knowledge_fragment = new Knowledge_Fragment();
     @BindView(R.id.main_bottom)
     BottomNavigationView mBottomNavigationView;
@@ -233,6 +235,8 @@ public class MainActivity extends BaseActivity {
                     case R.id.tab_knowledge:
                         switchFragment("知识体系",1);
                         break;
+                    case R.id.tab_navigation:
+                        switchFragment("导航",2);
                 }
                 return true;
             }
@@ -244,6 +248,7 @@ public class MainActivity extends BaseActivity {
     private void initFragment() {
         mFragments.add(mainFragment);
         mFragments.add(knowledge_fragment);
+        mFragments.add(navigationFragment);
         switchFragment("首页",0);
     }
 }

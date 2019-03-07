@@ -9,6 +9,7 @@
     <color name="blue">#3F9FE0</color>
     <color name="delete_text">#cccccc</color>
     <color name="grey">#b1a7a7</color>
+    <color name="deep_grey">#dad9d9</color>
     <color name="colorBackground">#EEEEEE</color>
     <color name="main_status_bar_blue">#279ede</color>
 </resources>
