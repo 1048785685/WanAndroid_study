@@ -230,12 +230,15 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.tab_main:
+                        Log.d("xxx","首页");
                         switchFragment("首页",0);
                         break;
                     case R.id.tab_knowledge:
+                        Log.d("xxx","知识体系");
                         switchFragment("知识体系",1);
                         break;
                     case R.id.tab_navigation:
+                        Log.d("xxx","导航");
                         switchFragment("导航",2);
                 }
                 return true;

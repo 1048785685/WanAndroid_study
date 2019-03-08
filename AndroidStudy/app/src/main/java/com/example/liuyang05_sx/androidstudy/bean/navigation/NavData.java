@@ -15,7 +15,7 @@ public class NavData {
     private int cid;
     @SerializedName("name")
     @Expose
-    private int name;
+    private String name;
     @SerializedName("articles")
     @Expose
     private List<Articles> list= new ArrayList<>();
@@ -28,11 +28,11 @@ public class NavData {
         this.cid = cid;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
     }
 

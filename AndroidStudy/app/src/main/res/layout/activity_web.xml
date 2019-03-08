@@ -12,7 +12,17 @@
         app:titleTextColor="@color/white"
         app:titleTextAppearance="@style/Web_Toolbar"
         app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-        />
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_like"
+            android:id="@+id/web_image"
+            android:layout_gravity="center_vertical|right"
+            android:layout_margin="15dp"
+            />
+    </android.support.v7.widget.Toolbar>
 
     <WebView
         android:layout_width="match_parent"

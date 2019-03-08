@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
 
 import com.example.liuyang05_sx.androidstudy.R;
@@ -28,6 +29,8 @@ public class WebActivity extends BaseActivity {
     WebView webView;
     @BindView(R.id.webView_toolbar)
     Toolbar webView_toolbar;
+    @BindView(R.id.web_image)
+    ImageView web_image;
     private String url;
     private String title;
 

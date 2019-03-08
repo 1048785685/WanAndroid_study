@@ -7,7 +7,6 @@ import com.example.liuyang05_sx.androidstudy.ui.knowledge.model.Know_Model;
 
 import java.util.List;
 
-import javax.security.auth.callback.Callback;
 
 
 public class Know_Presenter extends BasePresenter<IKnow_View>  implements IKnow_Presenter{

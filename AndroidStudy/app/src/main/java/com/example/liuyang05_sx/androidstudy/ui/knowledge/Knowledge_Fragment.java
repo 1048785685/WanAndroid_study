@@ -53,7 +53,7 @@ public class Knowledge_Fragment extends BaseFragment implements IKnow_View{
 
         mKnowledge_adapter = new Knowledge_RecyclerAdapter(view.getContext(),datumList);
         knowledge_recyclerView.setAdapter(mKnowledge_adapter);
-        knowledge_recyclerView.setVisibility(View.VISIBLE);
+
         mKnowledge_adapter.setOnRecyclerListener(new Knowledge_RecyclerAdapter.OnRecyclerListener() {
             @Override
             public void onItemListener(int position) {
@@ -78,5 +78,6 @@ public class Knowledge_Fragment extends BaseFragment implements IKnow_View{
     @Override
     public void putKnowData(List<Datum> list) {
         mKnowledge_adapter.refreshData(list);
+        knowledge_recyclerView.setVisibility(View.VISIBLE);
     }
 }

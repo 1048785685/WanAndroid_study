@@ -50,7 +50,7 @@ public class Articles {
     private String projectLink;
     @SerializedName("publishTime")
     @Expose
-    private Integer publishTime;
+    private long publishTime;
     @SerializedName("superChapterId")
     @Expose
     private Integer superChapterId;
@@ -188,11 +188,11 @@ public class Articles {
         this.projectLink = projectLink;
     }
 
-    public Integer getPublishTime() {
+    public long getPublishTime() {
         return publishTime;
     }
 
-    public void setPublishTime(Integer publishTime) {
+    public void setPublishTime(long publishTime) {
         this.publishTime = publishTime;
     }
 
