@@ -62,7 +62,7 @@ public class MainFragment extends BaseFragment implements IBannerView{
 
     private void initRecyclerView(){
         main_recyclerView.setVisibility(View.VISIBLE);
-        mainRecyclerAdapter = new MainRecyclerAdapter(view.getContext(),Banner_list,Main_list);
+        mainRecyclerAdapter = new MainRecyclerAdapter(view.getContext(),Banner_list,Main_list,true);
         main_recyclerView.setAdapter(mainRecyclerAdapter);
         mainRecyclerAdapter.setOnRecycleViewListener(new MainRecyclerAdapter.OnRecyclerViewListener() {
             @Override
@@ -94,14 +94,14 @@ public class MainFragment extends BaseFragment implements IBannerView{
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 page=0;
                 presenter.getData(page);
-                refreshLayout.finishRefresh(1000,true/*,false*/);
+                refreshLayout.finishRefresh(1000,true);
             }
         });
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener(){
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout){
                 presenter.loadMore(page);
-                refreshLayout.finishLoadMore(1000/*,false*/);
+                refreshLayout.finishLoadMore(1000);
             }
         });
     }

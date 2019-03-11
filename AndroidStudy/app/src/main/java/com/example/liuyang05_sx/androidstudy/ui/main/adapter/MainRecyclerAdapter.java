@@ -33,16 +33,17 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private OnRecyclerViewListener onRecyclerViewListener;
     private final int banner_View = 0;
     private final int other_Item = 1;
+    public boolean isMain;
     private List<String> title = new ArrayList<>();
     private List<String> image = new ArrayList<>();
     private List<String> url = new ArrayList<>();
     private List<Main_Banner> mData;
     private List<Data_>  mMainData;
-    private Banner mBanner;
-    public MainRecyclerAdapter(Context context,List<Main_Banner> lists,List<Data_> mMainData){
+    public MainRecyclerAdapter(Context context,List<Main_Banner> lists,List<Data_> mMainData,boolean flag){
         mContext = context;
         mData = lists;
         this.mMainData = mMainData;
+        isMain = flag;
     }
     @NonNull
     @Override
@@ -92,6 +93,9 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public int getItemViewType(int position) {
+        if (!isMain){
+            return other_Item;
+        }
         if (position ==0){
             return banner_View;
         }else if (position>0){

@@ -44,7 +44,7 @@ public class RetrofitSingleton {
 
     public static ApiInterface getApiService() {
         if (apiService == null) {
-            throw new NullPointerException("get apiService must be called after init");
+            getInstance();
         }
         return apiService;
     }

@@ -1,11 +1,13 @@
 package com.example.liuyang05_sx.androidstudy.http;
 
 import com.example.liuyang05_sx.androidstudy.bean.BaseResult;
+import com.example.liuyang05_sx.androidstudy.bean.Wx_and_Pro.Wx_pro_article;
 import com.example.liuyang05_sx.androidstudy.bean.knowledge.Datum;
 import com.example.liuyang05_sx.androidstudy.bean.main.Data;
 import com.example.liuyang05_sx.androidstudy.bean.main.LoginData;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 import com.example.liuyang05_sx.androidstudy.bean.navigation.NavData;
+import com.example.liuyang05_sx.androidstudy.bean.project.pro_Data;
 
 import java.util.List;
 
@@ -13,40 +15,60 @@ import io.reactivex.Observable;
 
 public class HttpHelperImp implements HttpHelper{
     public static HttpHelperImp httpHelperImp = new HttpHelperImp();
-    private static RetrofitSingleton retrofitSingleton = RetrofitSingleton.getInstance();
+
 
     @Override
     public Observable<BaseResult<List<Main_Banner>>> getBannerData() {
-        return retrofitSingleton.getApiService().getBannerData();
+        return RetrofitSingleton.getApiService().getBannerData();
     }
 
     @Override
     public Observable<BaseResult<Data>> getMainData(int page) {
-        return retrofitSingleton.getApiService().getMainData(page);
+        return RetrofitSingleton.getApiService().getMainData(page);
     }
 
     @Override
     public Observable<BaseResult<List<Datum>>> getTreeData() {
-        return retrofitSingleton.getApiService().getTreeData();
+        return RetrofitSingleton.getApiService().getTreeData();
+    }
+
+    @Override
+    public Observable<BaseResult<List<Wx_pro_article>>> getWxData() {
+        return RetrofitSingleton.getApiService().getWxData();
+    }
+
+    @Override
+    public Observable<BaseResult<Data>> getWxDetailData(int id, int page) {
+        return RetrofitSingleton.getApiService().getWxDetailData(id,page);
     }
 
     @Override
     public Observable<BaseResult<List<NavData>>> getNaviData() {
-        return retrofitSingleton.getApiService().getNaviData();
+        return RetrofitSingleton.getApiService().getNaviData();
+    }
+
+    @Override
+    public Observable<BaseResult<List<Wx_pro_article>>> getProjectData() {
+        return RetrofitSingleton.getApiService().getProjectData();
+    }
+
+    @Override
+    public Observable<BaseResult<pro_Data>> getProjectDetailData(int page, int cid) {
+        return RetrofitSingleton.getApiService().getProjectDetailData(page,cid);
     }
 
     @Override
     public Observable<BaseResult<LoginData>> Login_in(String username, String password) {
-        return retrofitSingleton.getApiService().Login_in(username,password);
+        return RetrofitSingleton.getApiService().Login_in(username,password);
     }
 
     @Override
     public Observable<BaseResult> Login_out() {
-        return retrofitSingleton.getApiService().Login_out();
+        return RetrofitSingleton.getApiService().Login_out();
     }
 
     @Override
     public Observable<BaseResult> Register(String username, String password, String repassword) {
-        return retrofitSingleton.getApiService().Register(username,password,repassword);
+        return RetrofitSingleton.getApiService().Register(username,password,repassword);
     }
 }

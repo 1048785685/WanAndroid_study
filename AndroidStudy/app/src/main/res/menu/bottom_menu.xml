@@ -16,6 +16,12 @@
         app:showAsAction="ifRoom"
         />
     <item
+        android:id="@+id/tab_wx_article"
+        android:enabled="true"
+        android:icon="@drawable/ic_wx_article"
+        android:title="公众号"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/tab_navigation"
         android:enabled="true"
         android:title="导航"

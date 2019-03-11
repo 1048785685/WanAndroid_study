@@ -30,6 +30,8 @@ import com.example.liuyang05_sx.androidstudy.http.HttpHelperImp;
 import com.example.liuyang05_sx.androidstudy.ui.knowledge.Knowledge_Fragment;
 import com.example.liuyang05_sx.androidstudy.ui.main.fragment.MainFragment;
 import com.example.liuyang05_sx.androidstudy.ui.navigation.NavigationFragment;
+import com.example.liuyang05_sx.androidstudy.ui.project.Project_fragment;
+import com.example.liuyang05_sx.androidstudy.ui.wx_article.Wx_Fragment;
 import com.example.liuyang05_sx.androidstudy.utils.ACache;
 import com.example.liuyang05_sx.androidstudy.utils.BottomNavigationViewHelper;
 import com.example.liuyang05_sx.androidstudy.utils.C;
@@ -54,7 +56,9 @@ public class MainActivity extends BaseActivity {
     private Fragment currentFragment = new Fragment();
     private MainFragment mainFragment = new MainFragment();
     private NavigationFragment navigationFragment = new NavigationFragment();
+    private Wx_Fragment wx_fragment = new Wx_Fragment();
     private Knowledge_Fragment knowledge_fragment = new Knowledge_Fragment();
+    private Project_fragment project_fragment = new Project_fragment();
     @BindView(R.id.main_bottom)
     BottomNavigationView mBottomNavigationView;
     @BindView(R.id.common_title)
@@ -237,9 +241,18 @@ public class MainActivity extends BaseActivity {
                         Log.d("xxx","知识体系");
                         switchFragment("知识体系",1);
                         break;
+                    case R.id.tab_wx_article:
+                        Log.d("xxx","公众号");
+                        switchFragment("公众号",2);
+                        break;
                     case R.id.tab_navigation:
                         Log.d("xxx","导航");
-                        switchFragment("导航",2);
+                        switchFragment("导航",3);
+                        break;
+                    case R.id.tab_project:
+                        Log.d("xxx","项目");
+                        switchFragment("项目",4);
+                        break;
                 }
                 return true;
             }
@@ -251,7 +264,9 @@ public class MainActivity extends BaseActivity {
     private void initFragment() {
         mFragments.add(mainFragment);
         mFragments.add(knowledge_fragment);
+        mFragments.add(wx_fragment);
         mFragments.add(navigationFragment);
+        mFragments.add(project_fragment);
         switchFragment("首页",0);
     }
 }
