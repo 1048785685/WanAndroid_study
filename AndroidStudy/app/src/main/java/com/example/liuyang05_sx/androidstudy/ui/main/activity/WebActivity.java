@@ -34,9 +34,9 @@ public class WebActivity extends BaseActivity {
     private String url;
     private String title;
 
+
     @Override
     protected void onDestroy() {
-        Log.d("XXX","destroy");
         if (webView != null) {
             webView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
             webView.clearHistory();
@@ -56,6 +56,10 @@ public class WebActivity extends BaseActivity {
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
         title = intent.getStringExtra("title");
+        String flag = intent.getStringExtra("project");
+        if (flag!=null){
+            web_image.setVisibility(View.INVISIBLE);
+        }
         setSupportActionBar(webView_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
