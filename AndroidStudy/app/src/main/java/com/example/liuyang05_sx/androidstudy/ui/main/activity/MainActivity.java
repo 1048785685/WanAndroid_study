@@ -31,6 +31,8 @@ import com.example.liuyang05_sx.androidstudy.ui.knowledge.Knowledge_Fragment;
 import com.example.liuyang05_sx.androidstudy.ui.main.fragment.MainFragment;
 import com.example.liuyang05_sx.androidstudy.ui.navigation.NavigationFragment;
 import com.example.liuyang05_sx.androidstudy.ui.project.Project_fragment;
+import com.example.liuyang05_sx.androidstudy.ui.save.Save_fragment;
+import com.example.liuyang05_sx.androidstudy.ui.setting.Setting_fragment;
 import com.example.liuyang05_sx.androidstudy.ui.wx_article.Wx_Fragment;
 import com.example.liuyang05_sx.androidstudy.utils.ACache;
 import com.example.liuyang05_sx.androidstudy.utils.BottomNavigationViewHelper;
@@ -156,17 +158,20 @@ public class MainActivity extends BaseActivity {
                 switch (menuItem.getItemId()){
                     case R.id.nav_item_Study:
                         menuItem.setChecked(true);
+                        switchFragment("首页",0);
                         Log.d("xxx","study");
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_item_collect:
                         menuItem.setChecked(true);
                         Log.d("xxx","collect");
+                        switchFragment("收藏",6);
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_item_setting:
                         menuItem.setChecked(true);
                         Log.d("xxx","setting");
+                        switchFragment("设置",5);
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_item_about:
@@ -213,6 +218,11 @@ public class MainActivity extends BaseActivity {
                 });
     }
     private void switchFragment(String title,int position){
+        if (position>4){
+            mBottomNavigationView.setVisibility(View.INVISIBLE);
+        }else {
+            mBottomNavigationView.setVisibility(View.VISIBLE);
+        }
         mCommon_title.setText(title);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         Fragment targetFrag = mFragments.get(position);
@@ -267,6 +277,8 @@ public class MainActivity extends BaseActivity {
         mFragments.add(wx_fragment);
         mFragments.add(navigationFragment);
         mFragments.add(project_fragment);
+        mFragments.add(new Setting_fragment());
+        mFragments.add(new Save_fragment());
         switchFragment("首页",0);
     }
 }

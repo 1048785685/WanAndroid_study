@@ -86,8 +86,6 @@ public class WebActivity extends BaseActivity {
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl(url);
 
-
-
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {

@@ -20,7 +20,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiInterface {
-    String HOST = "http://www.wanandroid.com/";
+    String HOST = "https://www.wanandroid.com/";
 
     /**
     首页Banner数据
