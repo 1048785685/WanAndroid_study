@@ -8,6 +8,7 @@ import com.example.liuyang05_sx.androidstudy.bean.main.LoginData;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 import com.example.liuyang05_sx.androidstudy.bean.navigation.NavData;
 import com.example.liuyang05_sx.androidstudy.bean.project.pro_Data;
+import com.example.liuyang05_sx.androidstudy.bean.save.ShowSaveData;
 
 import java.util.List;
 
@@ -55,6 +56,21 @@ public class HttpHelperImp implements HttpHelper{
     @Override
     public Observable<BaseResult<pro_Data>> getProjectDetailData(int page, int cid) {
         return RetrofitSingleton.getApiService().getProjectDetailData(page,cid);
+    }
+
+    @Override
+    public Observable<BaseResult> SaveArticle(int id) {
+        return RetrofitSingleton.getApiService().SaveArticle(id);
+    }
+
+    @Override
+    public Observable<BaseResult<ShowSaveData>> CollectArticle(int page) {
+        return RetrofitSingleton.getApiService().CollectArticle(page);
+    }
+
+    @Override
+    public Observable<BaseResult> unCollectArticle(int id,int originId) {
+        return RetrofitSingleton.getApiService().unCollectArticle(id,originId);
     }
 
     @Override

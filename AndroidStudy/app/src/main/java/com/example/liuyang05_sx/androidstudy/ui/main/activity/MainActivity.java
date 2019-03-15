@@ -31,7 +31,7 @@ import com.example.liuyang05_sx.androidstudy.ui.knowledge.Knowledge_Fragment;
 import com.example.liuyang05_sx.androidstudy.ui.main.fragment.MainFragment;
 import com.example.liuyang05_sx.androidstudy.ui.navigation.NavigationFragment;
 import com.example.liuyang05_sx.androidstudy.ui.project.Project_fragment;
-import com.example.liuyang05_sx.androidstudy.ui.save.Save_fragment;
+import com.example.liuyang05_sx.androidstudy.ui.save.CollectActivity;
 import com.example.liuyang05_sx.androidstudy.ui.setting.Setting_fragment;
 import com.example.liuyang05_sx.androidstudy.ui.wx_article.Wx_Fragment;
 import com.example.liuyang05_sx.androidstudy.utils.ACache;
@@ -112,6 +112,7 @@ public class MainActivity extends BaseActivity {
                             textView.setText("登录");
                             textView.setClickable(true);
                             mNav_view.getMenu().getItem(4).setVisible(false);
+                            switchFragment("首页",0);
                         }
                     }
                 });
@@ -163,9 +164,19 @@ public class MainActivity extends BaseActivity {
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_item_collect:
-                        menuItem.setChecked(true);
+                        menuItem.setCheckable(false);
                         Log.d("xxx","collect");
-                        switchFragment("收藏",6);
+
+                        if (C.isLogin){
+//                        switchFragment("收藏",6);
+                            Intent intent = new Intent();
+                            intent.setClass(MainActivity.this,CollectActivity.class);
+                            startActivity(intent);
+                        }else {
+                            Intent intent = new Intent();
+                            intent.setClass(MainActivity.this,LoginActivity.class);
+                            startActivity(intent);
+                        }
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_item_setting:
@@ -203,6 +214,7 @@ public class MainActivity extends BaseActivity {
                         RxBus.getDefault().post(new LoginEvent(false,""));
                         ACache.get(MainActivity.this).put(C.UserName,"");
                         ACache.get(MainActivity.this).put(C.PassWord,"");
+                        C.isLogin=false;
                         }
                     }
 
@@ -278,7 +290,7 @@ public class MainActivity extends BaseActivity {
         mFragments.add(navigationFragment);
         mFragments.add(project_fragment);
         mFragments.add(new Setting_fragment());
-        mFragments.add(new Save_fragment());
+//        mFragments.add(new Save_fragment());
         switchFragment("首页",0);
     }
 }

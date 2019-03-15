@@ -26,6 +26,9 @@ import com.example.liuyang05_sx.androidstudy.utils.ACache;
 import com.example.liuyang05_sx.androidstudy.utils.C;
 import com.example.liuyang05_sx.androidstudy.utils.RxBus;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observer;
@@ -113,7 +116,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             RxBus.getDefault().post(new LoginEvent(true,loginDataBaseResult.getData().getUsername()));
                             ACache.get(LoginActivity.this).put(C.UserName,loginDataBaseResult.getData().getUsername());
                             ACache.get(LoginActivity.this).put(C.PassWord,loginDataBaseResult.getData().getPassword());
-                            finish();
+                            C.isLogin =true;
+//                            finish();
+                            Timer timer = new Timer();
+                            timer.schedule(new TimerTask(){
+                                @Override
+                                public void run() {
+                                    finish();
+                                }
+                            },500); // 延时1秒
                         }else {
                             Toast.makeText(LoginActivity.this,loginDataBaseResult.getErrorMsg(),Toast.LENGTH_SHORT).show();
                         }

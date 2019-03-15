@@ -8,9 +8,11 @@ import com.example.liuyang05_sx.androidstudy.bean.main.LoginData;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 import com.example.liuyang05_sx.androidstudy.bean.navigation.NavData;
 import com.example.liuyang05_sx.androidstudy.bean.project.pro_Data;
+import com.example.liuyang05_sx.androidstudy.bean.save.ShowSaveData;
 
 import java.util.List;
 
+import butterknife.BindView;
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -69,6 +71,28 @@ public interface ApiInterface {
      */
     @GET("project/list/{page}/json")
     Observable<BaseResult<pro_Data>> getProjectDetailData(@Path("page") int page, @Query("cid") int cid);
+
+    /**
+     * 收藏站内文章
+     */
+    @POST("lg/collect/{id}/json")
+    Observable<BaseResult> SaveArticle(@Path("id") int id);
+
+
+    /**
+     * 收藏文章的列表
+     */
+    @GET("lg/collect/list/{page}/json")
+    Observable<BaseResult<ShowSaveData>> CollectArticle(@Path("page") int page);
+
+
+    /**
+    * 取消收藏页面文章的列表
+    */
+    @POST("lg/uncollect/{id}/json")
+    @FormUrlEncoded
+    Observable<BaseResult> unCollectArticle(@Path("id") int id,@Field("originId") int originId);
+
 
     /**
     登录

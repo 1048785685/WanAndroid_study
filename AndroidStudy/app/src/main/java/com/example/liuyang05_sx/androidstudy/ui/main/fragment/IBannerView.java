@@ -11,4 +11,6 @@ public interface IBannerView extends AbstractView {
 
     void showDataView(int page, List<Main_Banner> list,List<Data_> Main_list);
     void showLoadMore(int page,List<Data_> list);
+
+    void savesuccess();
 }

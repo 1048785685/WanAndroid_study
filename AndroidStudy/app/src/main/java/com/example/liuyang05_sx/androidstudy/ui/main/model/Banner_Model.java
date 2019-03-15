@@ -6,6 +6,7 @@ import com.example.liuyang05_sx.androidstudy.bean.BaseResult;
 import com.example.liuyang05_sx.androidstudy.bean.main.Data;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 import com.example.liuyang05_sx.androidstudy.http.HttpHelperImp;
+import com.example.liuyang05_sx.androidstudy.ui.main.presenter.BannerPresenter;
 import com.example.liuyang05_sx.androidstudy.ui.main.presenter.IBannerCallBack;
 
 import java.util.ArrayList;
@@ -76,6 +77,33 @@ public class Banner_Model implements Banner_IModel {
                     @Override
                     public void onNext(BaseResult<Data> dataBaseResult) {
                             callBack.successLoadMore(dataBaseResult.getData().getCurPage(),dataBaseResult.getData().getDatas());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void Save(int id, IBannerCallBack callBack) {
+        HttpHelperImp.httpHelperImp.SaveArticle(id)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BaseResult>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(BaseResult baseResult) {
+                        callBack.Savesuccess();
                     }
 
                     @Override

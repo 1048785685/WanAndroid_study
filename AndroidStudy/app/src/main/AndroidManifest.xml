@@ -36,6 +36,8 @@
         <activity android:name=".ui.main.activity.RegisterActivity"
             android:launchMode="singleTask"/>
 
+        <activity android:name=".ui.save.CollectActivity"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

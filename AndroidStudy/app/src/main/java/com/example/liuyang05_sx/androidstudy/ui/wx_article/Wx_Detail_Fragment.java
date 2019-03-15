@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.liuyang05_sx.androidstudy.R;
 import com.example.liuyang05_sx.androidstudy.base.fragment.BaseFragment;
@@ -87,7 +88,7 @@ public class Wx_Detail_Fragment extends BaseFragment {
             }
 
             @Override
-            public void onLikeClick(View view) {
+            public void onLikeClick(ImageView view, int id) {
 
             }
 

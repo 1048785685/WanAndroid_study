@@ -81,6 +81,10 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder)viewHolder).main_item_tag.setText(mMainData.get(i).getSuperChapterName()+"/"+mMainData.get(i).getChapterName());
             ((ViewHolder)viewHolder).main_item_time.setText(Time.getTime("yyyy-MM-dd",mMainData.get(i).getPublishTime()));
             ((ViewHolder)viewHolder).main_item_title.setText(Html.fromHtml(mMainData.get(i).getTitle()));
+            if (mMainData.get(i).getCollect()){
+                ((ViewHolder) viewHolder).main_item_like.setImageResource(R.drawable.icon_like_selected);
+            }
+
         }
     }
 
@@ -123,7 +127,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 main_item_like.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        onRecyclerViewListener.onLikeClick(v);
+                        onRecyclerViewListener.onLikeClick(main_item_like,mMainData.get(getLayoutPosition()).getId());
                     }
                 });
                 itemView.setOnClickListener(new View.OnClickListener(){
@@ -163,9 +167,10 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         mMainData.addAll(list);
         notifyDataSetChanged();
     }
+
     public interface OnRecyclerViewListener{
         void onItemClick(String url,String title);
-        void onLikeClick(View view);
+        void onLikeClick(ImageView imageView,int id);
         void onBannerClick(String url,String title);
     }
     public void setOnRecycleViewListener(OnRecyclerViewListener itemClickListener){

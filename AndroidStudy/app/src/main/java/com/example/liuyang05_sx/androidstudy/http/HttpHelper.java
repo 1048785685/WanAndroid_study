@@ -8,6 +8,7 @@ import com.example.liuyang05_sx.androidstudy.bean.main.LoginData;
 import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 import com.example.liuyang05_sx.androidstudy.bean.navigation.NavData;
 import com.example.liuyang05_sx.androidstudy.bean.project.pro_Data;
+import com.example.liuyang05_sx.androidstudy.bean.save.ShowSaveData;
 
 import java.util.List;
 
@@ -54,6 +55,21 @@ public interface HttpHelper {
      * 获取项目的文章目录
      */
     Observable<BaseResult<pro_Data>> getProjectDetailData(int page,int cid);
+
+    /**
+     * 收藏站内文章
+     */
+    Observable<BaseResult> SaveArticle(int id);
+
+    /**
+     * 收藏文章的列表
+     */
+    Observable<BaseResult<ShowSaveData>> CollectArticle(int page);
+
+    /**
+     * 收藏文章的列表
+     */
+    Observable<BaseResult> unCollectArticle(int id,int originId);
 
     /**
     登录

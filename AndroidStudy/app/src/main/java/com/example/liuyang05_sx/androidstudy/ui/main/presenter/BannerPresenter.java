@@ -35,6 +35,9 @@ public class BannerPresenter extends BasePresenter<IBannerView> implements IBann
 //        getMvpView().startLoading();
         mBanner_Model.getData(page,this);
     }
+    public void Save(int id){
+        mBanner_Model.Save(id,this);
+    }
     @Override
     public void successLoadMore(int page,List<Data_> data){
         getMvpView().showLoadMore(page,data);
@@ -44,6 +47,11 @@ public class BannerPresenter extends BasePresenter<IBannerView> implements IBann
     public void successMain_Data(int page,List<Main_Banner> data, List<Data_> list) {
 
         getMvpView().showDataView(page,data,list);
+    }
+
+    @Override
+    public void Savesuccess() {
+        getMvpView().savesuccess();
     }
 
     public void loadMore(int page) {
