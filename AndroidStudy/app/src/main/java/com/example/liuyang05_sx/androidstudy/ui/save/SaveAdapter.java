@@ -3,6 +3,7 @@ package com.example.liuyang05_sx.androidstudy.ui.save;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class SaveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((ViewHolder) viewHolder).save_item_like.setImageResource(R.drawable.icon_like_selected);
             ((ViewHolder) viewHolder).save_item_tag.setText(mList.get(i).getChapterName());
             ((ViewHolder) viewHolder).save_item_time.setText(Time.getTime("yyyy-MM-dd",mList.get(i).getPublishTime()));
-            ((ViewHolder) viewHolder).save_item_title.setText(mList.get(i).getTitle());
+            ((ViewHolder) viewHolder).save_item_title.setText(Html.fromHtml(mList.get(i).getTitle()));
         }
     }
 

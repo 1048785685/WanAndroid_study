@@ -113,18 +113,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     @Override
                     public void onNext(BaseResult<LoginData> loginDataBaseResult){
                         if (loginDataBaseResult.getErrorCode()==0){
+                            C.isLogin =true;
                             RxBus.getDefault().post(new LoginEvent(true,loginDataBaseResult.getData().getUsername()));
                             ACache.get(LoginActivity.this).put(C.UserName,loginDataBaseResult.getData().getUsername());
                             ACache.get(LoginActivity.this).put(C.PassWord,loginDataBaseResult.getData().getPassword());
-                            C.isLogin =true;
-//                            finish();
                             Timer timer = new Timer();
                             timer.schedule(new TimerTask(){
                                 @Override
                                 public void run() {
                                     finish();
                                 }
-                            },500); // 延时1秒
+                            },500); // 延时0.5秒
                         }else {
                             Toast.makeText(LoginActivity.this,loginDataBaseResult.getErrorMsg(),Toast.LENGTH_SHORT).show();
                         }

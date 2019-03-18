@@ -1,5 +1,6 @@
 package com.example.liuyang05_sx.androidstudy.ui.knowledge;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -57,7 +58,12 @@ public class Knowledge_Fragment extends BaseFragment implements IKnow_View{
         mKnowledge_adapter.setOnRecyclerListener(new Knowledge_RecyclerAdapter.OnRecyclerListener() {
             @Override
             public void onItemListener(int position) {
-                Toast.makeText(view.getContext(),"点击第"+position+"按钮",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                Bundle bundle =new Bundle();
+                bundle.putSerializable("list",datumList.get(position));
+                intent.putExtras(bundle);
+                intent.setClass(view.getContext(),Knowledge_Detail_Activity.class);
+                startActivity(intent);
             }
         });
 
@@ -77,6 +83,7 @@ public class Knowledge_Fragment extends BaseFragment implements IKnow_View{
 
     @Override
     public void putKnowData(List<Datum> list) {
+        datumList = list;
         mKnowledge_adapter.refreshData(list);
         knowledge_recyclerView.setVisibility(View.VISIBLE);
     }

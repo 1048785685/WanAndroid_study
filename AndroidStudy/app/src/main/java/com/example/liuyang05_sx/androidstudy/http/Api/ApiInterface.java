@@ -43,6 +43,17 @@ public interface ApiInterface {
     Observable<BaseResult<List<Datum>>> getTreeData();
 
     /**
+     * 知识体系下的文章
+     * http://www.wanandroid.com/article/list/0?cid=60
+     *
+     * @param page page num
+     * @param cid second page id
+     * @return 知识体系feed文章数据
+     */
+    @GET("article/list/{page}/json")
+    Observable<BaseResult<Data>> getKnowledgeDetailData(@Path("page") int page, @Query("cid") int cid);
+
+    /**
     微信公众号tab
      */
     @GET("wxarticle/chapters/json")

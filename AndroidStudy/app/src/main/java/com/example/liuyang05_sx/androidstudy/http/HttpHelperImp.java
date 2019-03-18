@@ -34,6 +34,11 @@ public class HttpHelperImp implements HttpHelper{
     }
 
     @Override
+    public Observable<BaseResult<Data>> getKnowledgeDetailData(int page, int cid) {
+        return RetrofitSingleton.getApiService().getKnowledgeDetailData(page,cid);
+    }
+
+    @Override
     public Observable<BaseResult<List<Wx_pro_article>>> getWxData() {
         return RetrofitSingleton.getApiService().getWxData();
     }

@@ -1,10 +1,11 @@
 package com.example.liuyang05_sx.androidstudy.bean.knowledge;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Child {
+public class Child implements Serializable {
 
 @SerializedName("children")
 @Expose

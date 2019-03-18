@@ -1,8 +1,7 @@
-package com.example.liuyang05_sx.androidstudy.ui.wx_article;
+package com.example.liuyang05_sx.androidstudy.ui.knowledge;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,20 +35,22 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class Wx_Detail_Fragment extends BaseFragment {
+public class Knowledge_Detail_PagerFragment extends BaseFragment {
     private View view;
-    private int mPage = 1;
+    private int mPage = 0;
     private Knowledge_Detail_Adapter adapter;
     private boolean isFirst = true;
     private List<Data_> mlist = new ArrayList<>();
-    @BindView(R.id.wx_detail_recycler)
+    @BindView(R.id.fragment_knowdetail_recycler)
     RecyclerView recyclerView;
-    @BindView(R.id.fragment_wx_refresh)
+    @BindView(R.id.fragment_knowdetail_refresh)
     RefreshLayout fragment_wx_refresh;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_wx_detail,container,false);
+        view = inflater.inflate(R.layout.fragment_know_detail,container,false);
         ButterKnife.bind(this,view);
         getDetailsData();
         init();
@@ -65,6 +66,9 @@ public class Wx_Detail_Fragment extends BaseFragment {
         fragment_wx_refresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                isFirst = true;
+                mPage=0;
+                getDetailsData();
                 refreshLayout.finishRefresh(1000);
             }
         });
@@ -91,10 +95,11 @@ public class Wx_Detail_Fragment extends BaseFragment {
 
             }
         });
+
     }
 
-    public static Wx_Detail_Fragment getInstance(int id){
-        Wx_Detail_Fragment fragment = new Wx_Detail_Fragment();
+    public static Knowledge_Detail_PagerFragment getInstance(int id){
+        Knowledge_Detail_PagerFragment fragment = new Knowledge_Detail_PagerFragment();
         Bundle args = new Bundle();
         args.putInt(C.ARG_PARAM1, id);
         fragment.setArguments(args);
@@ -103,15 +108,15 @@ public class Wx_Detail_Fragment extends BaseFragment {
 
     private void showRecyclerView(){
         if (isFirst){
-        adapter.replaceMainData(mlist);
-        isFirst = false;
+            adapter.replaceMainData(mlist);
+            isFirst = false;
         }else {
             adapter.addData(mlist);
         }
     }
     private void getDetailsData(){
         int id = getArguments().getInt(C.ARG_PARAM1);
-        HttpHelperImp.httpHelperImp.getWxDetailData(id,mPage)
+        HttpHelperImp.httpHelperImp.getKnowledgeDetailData(mPage,id)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseResult<Data>>() {
                     @Override
@@ -123,7 +128,7 @@ public class Wx_Detail_Fragment extends BaseFragment {
                     public void onNext(BaseResult<Data> dataBaseResult) {
                         if (dataBaseResult.getErrorCode() == 0){
                             mlist = dataBaseResult.getData().getDatas();
-                            mPage = dataBaseResult.getData().getCurPage()+1;
+                            mPage = dataBaseResult.getData().getCurPage();
                             showRecyclerView();
                         }
 

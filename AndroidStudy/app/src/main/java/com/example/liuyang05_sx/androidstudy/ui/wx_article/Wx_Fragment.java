@@ -27,15 +27,13 @@ public class Wx_Fragment extends BaseFragment implements IWx_Fragment{
     SlidingTabLayout mTabLayout;
     @BindView(R.id.wx_viewpager)
     ViewPager viewPager;
-    private View view;
-    private Wx_P presenter;
     private List<BaseFragment> fragments = new ArrayList<>();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_wxarticle,container,false);
-        ButterKnife.bind(this,view);
-        presenter = new Wx_P();
+        View view = inflater.inflate(R.layout.fragment_wxarticle, container, false);
+        ButterKnife.bind(this, view);
+        Wx_P presenter = new Wx_P();
         presenter.attachView(this);
         presenter.getTabData();
         return view;

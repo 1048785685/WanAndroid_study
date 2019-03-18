@@ -1,10 +1,15 @@
 package com.example.liuyang05_sx.androidstudy.bean.knowledge;
 
+
+import android.os.Parcelable;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Datum {
+public class Datum implements Serializable {
 
 @SerializedName("children")
 @Expose

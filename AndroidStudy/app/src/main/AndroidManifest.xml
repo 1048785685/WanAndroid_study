@@ -38,6 +38,8 @@
 
         <activity android:name=".ui.save.CollectActivity"
             android:launchMode="singleTask"/>
+
+        <activity android:name=".ui.knowledge.Knowledge_Detail_Activity"/>
     </application>
 
 </manifest>

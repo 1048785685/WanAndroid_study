@@ -3,6 +3,7 @@ package com.example.liuyang05_sx.androidstudy.ui.project;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class Project_Detail_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
             ((ViewHolder) viewHolder).item_project_detail_author_tv.setText(data.get(i).getAuthor());
             ((ViewHolder) viewHolder).item_project_detail_content_tv.setText(data.get(i).getDesc());
             ((ViewHolder) viewHolder).item_project_detail_time_tv.setText(data.get(i).getNiceDate());
-            ((ViewHolder) viewHolder).item_project_detail_title_tv.setText(data.get(i).getTitle());
+            ((ViewHolder) viewHolder).item_project_detail_title_tv.setText(Html.fromHtml(data.get(i).getTitle()));
             Glide.with(context).load(data.get(i).getEnvelopePic()).into(((ViewHolder) viewHolder).item_project_detail_iv);
         }
     }

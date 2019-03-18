@@ -25,7 +25,6 @@ import com.example.liuyang05_sx.androidstudy.ui.main.activity.LoginActivity;
 import com.example.liuyang05_sx.androidstudy.ui.main.activity.WebActivity;
 import com.example.liuyang05_sx.androidstudy.ui.main.adapter.MainRecyclerAdapter;
 import com.example.liuyang05_sx.androidstudy.ui.main.presenter.BannerPresenter;
-import com.example.liuyang05_sx.androidstudy.utils.ACache;
 import com.example.liuyang05_sx.androidstudy.utils.C;
 import com.example.liuyang05_sx.androidstudy.utils.DividerItemDecoration;
 
@@ -135,7 +134,7 @@ public class MainFragment extends BaseFragment implements IBannerView{
             flag++;
             initRecyclerView();
         }else {
-            mainRecyclerAdapter.replaceManiData(Main_list);
+            mainRecyclerAdapter.replaceMainData(Main_list);
         }
         this.page =page;
     }
@@ -159,13 +158,9 @@ public class MainFragment extends BaseFragment implements IBannerView{
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<LoginEvent>() {
                     @Override
-                    public void accept(LoginEvent loginEvent) throws Exception{
-                        if (loginEvent.isLogin()) {
-                            refreshLayout.autoRefresh();
-                        }else if (!loginEvent.isLogin()){
-                            page=0;
-                            presenter.getData(page);
-                        }
+                    public void accept(LoginEvent loginEvent) throws Exception {
+
+                        refreshLayout.autoRefresh();
                     }
                 });
         RxBus.getDefault().toObservable(this,CollectEvent.class).subscribeOn(Schedulers.io())
@@ -173,6 +168,7 @@ public class MainFragment extends BaseFragment implements IBannerView{
                 .subscribe(new Consumer<CollectEvent>() {
                     @Override
                     public void accept(CollectEvent collectEvent) throws Exception {
+
                         refreshLayout.autoRefresh();
                     }
                 });

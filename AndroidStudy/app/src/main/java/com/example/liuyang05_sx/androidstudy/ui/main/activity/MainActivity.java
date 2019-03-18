@@ -2,8 +2,6 @@ package com.example.liuyang05_sx.androidstudy.ui.main.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -290,7 +288,6 @@ public class MainActivity extends BaseActivity {
         mFragments.add(navigationFragment);
         mFragments.add(project_fragment);
         mFragments.add(new Setting_fragment());
-//        mFragments.add(new Save_fragment());
         switchFragment("首页",0);
     }
 }
