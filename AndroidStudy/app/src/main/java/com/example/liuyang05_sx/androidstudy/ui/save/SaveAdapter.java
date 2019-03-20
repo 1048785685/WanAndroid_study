@@ -73,18 +73,19 @@ public class SaveAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    saveOnRecyclerView.onItemClick();
+                    saveOnRecyclerView.onItemClick(getLayoutPosition());
                 }
             });
         }
     }
     public void dataChanged(List<ShowSaveData_> list){
+        mList.clear();
         mList = list;
         notifyDataSetChanged();
     }
     interface SaveOnRecyclerView{
         void onLikeClick(int position);
-        void onItemClick();
+        void onItemClick(int position);
     }
     public void OnSaveRecyclerClick(SaveOnRecyclerView onRecyclerView){
         saveOnRecyclerView = onRecyclerView;

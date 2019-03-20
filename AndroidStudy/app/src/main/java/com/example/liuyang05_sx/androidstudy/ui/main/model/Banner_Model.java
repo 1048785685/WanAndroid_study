@@ -118,5 +118,32 @@ public class Banner_Model implements Banner_IModel {
                 });
     }
 
+    @Override
+    public void unCollect(int id, IBannerCallBack callBack) {
+        HttpHelperImp.httpHelperImp.unCollect(id)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BaseResult>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(BaseResult baseResult) {
+                        callBack.Cancel();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 
 }

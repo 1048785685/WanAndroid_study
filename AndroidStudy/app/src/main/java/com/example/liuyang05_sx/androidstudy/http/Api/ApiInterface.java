@@ -9,6 +9,7 @@ import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 import com.example.liuyang05_sx.androidstudy.bean.navigation.NavData;
 import com.example.liuyang05_sx.androidstudy.bean.project.pro_Data;
 import com.example.liuyang05_sx.androidstudy.bean.save.ShowSaveData;
+import com.example.liuyang05_sx.androidstudy.bean.search.SearchDatum;
 
 import java.util.List;
 
@@ -98,6 +99,12 @@ public interface ApiInterface {
 
 
     /**
+     * 在文章列表页面，取消收藏
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<BaseResult> unCollect(@Path("id") int id);
+
+    /**
     * 取消收藏页面文章的列表
     */
     @POST("lg/uncollect/{id}/json")
@@ -127,5 +134,10 @@ public interface ApiInterface {
     Observable<BaseResult> Register(@Field("username") String username
             ,@Field("password") String password,@Field("repassword") String repassword);
 
+    /**
+     * 热门搜索
+     */
+    @GET("hotkey/json")
+    Observable<BaseResult<List<SearchDatum>>> HotSearch();
 
 }

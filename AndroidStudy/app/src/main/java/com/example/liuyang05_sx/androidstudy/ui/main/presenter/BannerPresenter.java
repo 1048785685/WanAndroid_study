@@ -38,6 +38,9 @@ public class BannerPresenter extends BasePresenter<IBannerView> implements IBann
     public void Save(int id){
         mBanner_Model.Save(id,this);
     }
+    public void unCollect(int id){
+        mBanner_Model.unCollect(id,this);
+    }
     @Override
     public void successLoadMore(int page,List<Data_> data){
         getMvpView().showLoadMore(page,data);
@@ -52,6 +55,11 @@ public class BannerPresenter extends BasePresenter<IBannerView> implements IBann
     @Override
     public void Savesuccess() {
         getMvpView().savesuccess();
+    }
+
+    @Override
+    public void Cancel() {
+        getMvpView().Cancel();
     }
 
     public void loadMore(int page) {

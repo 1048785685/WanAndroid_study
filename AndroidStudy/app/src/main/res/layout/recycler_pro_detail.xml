@@ -84,6 +84,15 @@
                     android:gravity="center"
                     tools:text="GcsSloop"
                     android:textColor="@color/strength_grey" />
+                <ImageView
+                    android:id="@+id/item_project_detail_like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_like_article_not_selected"
+                    />
 
             </RelativeLayout>
         </RelativeLayout>

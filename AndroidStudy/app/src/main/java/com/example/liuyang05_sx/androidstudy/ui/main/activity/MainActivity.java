@@ -82,9 +82,6 @@ public class MainActivity extends BaseActivity {
         registerEvent();
         initBottomNavigationView();
 
-//        if (ACache.getDefault().getAsString(C.UserName)!=null){
-//            Log.d("xxx","111111");
-//        }
         initFragment();
         initNavgationView();
     }
@@ -110,7 +107,7 @@ public class MainActivity extends BaseActivity {
                             textView.setText("登录");
                             textView.setClickable(true);
                             mNav_view.getMenu().getItem(4).setVisible(false);
-                            switchFragment("首页",0);
+//                            switchFragment("首页",0);
                         }
                     }
                 });
@@ -158,15 +155,14 @@ public class MainActivity extends BaseActivity {
                     case R.id.nav_item_Study:
                         menuItem.setChecked(true);
                         switchFragment("首页",0);
-                        Log.d("xxx","study");
+
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_item_collect:
                         menuItem.setCheckable(false);
-                        Log.d("xxx","collect");
+
 
                         if (C.isLogin){
-//                        switchFragment("收藏",6);
                             Intent intent = new Intent();
                             intent.setClass(MainActivity.this,CollectActivity.class);
                             startActivity(intent);
@@ -179,14 +175,14 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.nav_item_setting:
                         menuItem.setChecked(true);
-                        Log.d("xxx","setting");
+
                         switchFragment("设置",5);
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_item_about:
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
-                        Log.d("xxx","about");
+
                         break;
                     case R.id.nav_item_loginout:
                         Login_out();
@@ -254,23 +250,23 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.tab_main:
-                        Log.d("xxx","首页");
+
                         switchFragment("首页",0);
                         break;
                     case R.id.tab_knowledge:
-                        Log.d("xxx","知识体系");
+
                         switchFragment("知识体系",1);
                         break;
                     case R.id.tab_wx_article:
-                        Log.d("xxx","公众号");
+
                         switchFragment("公众号",2);
                         break;
                     case R.id.tab_navigation:
-                        Log.d("xxx","导航");
+
                         switchFragment("导航",3);
                         break;
                     case R.id.tab_project:
-                        Log.d("xxx","项目");
+
                         switchFragment("项目",4);
                         break;
                 }

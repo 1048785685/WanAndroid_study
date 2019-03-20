@@ -64,6 +64,8 @@ public class NavigationFragment extends BaseFragment implements INavi_View{
                 Intent intent = new Intent();
                 intent.putExtra("title",list.get(position).getList().get(i).getTitle());
                 intent.putExtra("url",list.get(position).getList().get(i).getLink());
+                intent.putExtra("id",list.get(position).getList().get(i).getId());
+                intent.putExtra("like",list.get(position).getList().get(i).getCollect());
                 intent.setClass(view.getContext(),WebActivity.class);
                 startActivity(intent);
             }

@@ -78,31 +78,35 @@ public class MainFragment extends BaseFragment implements IBannerView{
         main_recyclerView.setAdapter(mainRecyclerAdapter);
         mainRecyclerAdapter.setOnRecycleViewListener(new MainRecyclerAdapter.OnRecyclerViewListener() {
             @Override
-            public void onItemClick(String url,String title) {
+            public void onItemClick(int position) {
                 Intent intent = new Intent();
-                intent.putExtra("title",title);
-                intent.putExtra("url",url);
+                intent.putExtra("title",Main_list.get(position).getTitle());
+                intent.putExtra("url",Main_list.get(position).getLink());
+                intent.putExtra("id",Main_list.get(position).getId());
+                intent.putExtra("like",Main_list.get(position).getCollect());
                 intent.setClass(mview.getContext(),WebActivity.class);
                 startActivity(intent);
             }
 
             @Override
-            public void onLikeClick(ImageView imageView,int id) {
-                if (C.isLogin) {
+            public void onLikeClick(int id,boolean isLike) {
+                if (C.isLogin&&!isLike) {
                     presenter.Save(id);
-                    imageView.setImageResource(R.drawable.icon_like_selected);
+                }else if (C.isLogin&&isLike){
+                    presenter.unCollect(id);
                 }else {
                     Intent intent = new Intent();
                     intent.setClass(mview.getContext(),LoginActivity.class);
                     startActivity(intent);
                 }
             }
-
             @Override
-            public void onBannerClick(String url,String title) {
+            public void onBannerClick(int position) {
                 Intent intent = new Intent();
-                intent.putExtra("title",title);
-                intent.putExtra("url",url);
+                intent.putExtra("title",Banner_list.get(position).getTitle());
+                intent.putExtra("url",Banner_list.get(position).getUrl());
+                intent.putExtra("id",Banner_list.get(position).getId());
+                intent.putExtra("display","display");
                 intent.setClass(mview.getContext(),WebActivity.class);
                 startActivity(intent);
             }
@@ -127,10 +131,10 @@ public class MainFragment extends BaseFragment implements IBannerView{
 
     @Override
     public void showDataView(int page, List<Main_Banner> list,List<Data_> Main_list) {
+        this.Main_list = Main_list;
         if (flag==0){
             this.page = page;
             Banner_list = list;
-            this.Main_list = Main_list;
             flag++;
             initRecyclerView();
         }else {
@@ -141,6 +145,7 @@ public class MainFragment extends BaseFragment implements IBannerView{
 
     @Override
     public void showLoadMore(int page, List<Data_> list) {
+        Main_list.addAll(list);
         mainRecyclerAdapter.addData(list);
         this.page = page;
     }
@@ -149,6 +154,12 @@ public class MainFragment extends BaseFragment implements IBannerView{
     public void savesuccess() {
         RxBus.getDefault().post(new CollectEvent());
         Toast.makeText(mview.getContext() ,"文章已收藏",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void Cancel() {
+        RxBus.getDefault().post(new CollectEvent());
+        Toast.makeText(mview.getContext() ,"取消收藏成功",Toast.LENGTH_SHORT).show();
     }
 
     @SuppressLint("CheckResult")

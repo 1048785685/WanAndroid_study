@@ -9,6 +9,7 @@ import com.example.liuyang05_sx.androidstudy.bean.main.Main_Banner;
 import com.example.liuyang05_sx.androidstudy.bean.navigation.NavData;
 import com.example.liuyang05_sx.androidstudy.bean.project.pro_Data;
 import com.example.liuyang05_sx.androidstudy.bean.save.ShowSaveData;
+import com.example.liuyang05_sx.androidstudy.bean.search.SearchDatum;
 
 import java.util.List;
 
@@ -74,6 +75,11 @@ public class HttpHelperImp implements HttpHelper{
     }
 
     @Override
+    public Observable<BaseResult> unCollect(int id) {
+        return RetrofitSingleton.getApiService().unCollect(id);
+    }
+
+    @Override
     public Observable<BaseResult> unCollectArticle(int id,int originId) {
         return RetrofitSingleton.getApiService().unCollectArticle(id,originId);
     }
@@ -91,5 +97,10 @@ public class HttpHelperImp implements HttpHelper{
     @Override
     public Observable<BaseResult> Register(String username, String password, String repassword) {
         return RetrofitSingleton.getApiService().Register(username,password,repassword);
+    }
+
+    @Override
+    public Observable<BaseResult<List<SearchDatum>>> HotSearch() {
+        return RetrofitSingleton.getApiService().HotSearch();
     }
 }

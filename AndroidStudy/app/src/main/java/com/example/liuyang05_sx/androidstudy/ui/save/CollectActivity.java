@@ -3,6 +3,7 @@ package com.example.liuyang05_sx.androidstudy.ui.save;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,8 +19,11 @@ import com.example.liuyang05_sx.androidstudy.bean.save.ShowSaveData;
 import com.example.liuyang05_sx.androidstudy.bean.save.ShowSaveData_;
 import com.example.liuyang05_sx.androidstudy.http.HttpHelperImp;
 import com.example.liuyang05_sx.androidstudy.ui.main.activity.MainActivity;
+import com.example.liuyang05_sx.androidstudy.ui.main.activity.WebActivity;
 import com.example.liuyang05_sx.androidstudy.utils.DividerItemDecoration;
 import com.example.liuyang05_sx.androidstudy.utils.RxBus;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +43,8 @@ public class CollectActivity extends BaseActivity {
     RecyclerView save_recycler;
     @BindView(R.id.save_toolbar)
     Toolbar save_toolbar;
+    @BindView(R.id.collect_refresh)
+    RefreshLayout collect_refresh;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +55,6 @@ public class CollectActivity extends BaseActivity {
         getCollect();
     }
     private void init() {
-
-
 
         setSupportActionBar(save_toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -67,7 +71,15 @@ public class CollectActivity extends BaseActivity {
         save_recycler.setVisibility(View.VISIBLE);
         saveAdapter = new SaveAdapter(CollectActivity.this,list);
         save_recycler.setAdapter(saveAdapter);
-        save_recycler.setVisibility(View.INVISIBLE);
+
+        collect_refresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                getCollect();
+                refreshLayout.finishRefresh(1000,true);
+            }
+        });
+
         saveAdapter.OnSaveRecyclerClick(new SaveAdapter.SaveOnRecyclerView() {
             @Override
             public void onLikeClick(int position) {
@@ -75,8 +87,15 @@ public class CollectActivity extends BaseActivity {
             }
 
             @Override
-            public void onItemClick() {
-
+            public void onItemClick(int position) {
+                Intent intent = new Intent();
+                intent.putExtra("title",list.get(position).getTitle());
+                intent.putExtra("url",list.get(position).getLink());
+                intent.putExtra("like",true);
+                intent.putExtra("id",list.get(position).getId());
+                intent.putExtra("originId",list.get(position).getOriginId());
+                intent.setClass(CollectActivity.this,WebActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -92,7 +111,6 @@ public class CollectActivity extends BaseActivity {
 
                     @Override
                     public void onNext(BaseResult baseResult) {
-//                        getCollect();
                         RxBus.getDefault().post(new CollectEvent());
                     }
 
@@ -121,7 +139,8 @@ public class CollectActivity extends BaseActivity {
                     public void onNext(BaseResult<ShowSaveData> showSaveDataBaseResult) {
                         list = showSaveDataBaseResult.getData().getDatas();
                         saveAdapter.dataChanged(list);
-                        save_recycler.setVisibility(View.VISIBLE);
+
+
                     }
 
                     @Override
@@ -159,7 +178,7 @@ public class CollectActivity extends BaseActivity {
                 .subscribe(new Consumer<CollectEvent>() {
                     @Override
                     public void accept(CollectEvent collectEvent) throws Exception {
-                        getCollect();
+                        collect_refresh.autoRefresh();
                     }
                 });
     }

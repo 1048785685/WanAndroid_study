@@ -54,7 +54,6 @@ public class Knowledge_Detail_Adapter extends RecyclerView.Adapter<RecyclerView.
             ((ViewHolder)viewHolder).main_item_time.setText(Time.getTime("yyyy-MM-dd",mMainData.get(i).getPublishTime()));
             ((ViewHolder)viewHolder).main_item_title.setText(Html.fromHtml(mMainData.get(i).getTitle()));
             if (mMainData.get(i).getCollect()){
-                Log.d("xxx",mMainData.get(i).getTitle()+"            ");
                 ((ViewHolder) viewHolder).main_item_like.setImageResource(R.drawable.icon_like_selected);
             }else {
                 ((ViewHolder) viewHolder).main_item_like.setImageResource(R.drawable.icon_like_article_not_selected);
@@ -89,14 +88,15 @@ public class Knowledge_Detail_Adapter extends RecyclerView.Adapter<RecyclerView.
                 main_item_like.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        onRecyclerViewListener.onLikeClick(main_item_like,mMainData.get(getLayoutPosition()).getId());
+                        onRecyclerViewListener.onLikeClick(mMainData.get(getLayoutPosition()).getId()
+                        ,mMainData.get(getLayoutPosition()).getCollect());
                     }
                 });
                 itemView.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-                        onRecyclerViewListener.onItemClick(mMainData.get(getLayoutPosition()).getLink(),
-                                String.valueOf(Html.fromHtml(mMainData.get(getLayoutPosition()).getTitle())));
+                        onRecyclerViewListener.onItemClick(getLayoutPosition()
+                                ,mMainData.get(getLayoutPosition()).getCollect());
 
                     }
                 });
@@ -104,6 +104,7 @@ public class Knowledge_Detail_Adapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
     public void replaceMainData(List<Data_> list){
+        mMainData.clear();
         mMainData = list;
         notifyDataSetChanged();
     }
@@ -114,8 +115,8 @@ public class Knowledge_Detail_Adapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     public interface OnRecyclerViewListener{
-        void onItemClick(String url,String title);
-        void onLikeClick(ImageView imageView,int id);
+        void onItemClick(int position,boolean isLike);
+        void onLikeClick(int id,boolean isLike);
     }
     public void setOnRecycleViewListener(OnRecyclerViewListener itemClickListener){
         this.onRecyclerViewListener = itemClickListener;

@@ -10,4 +10,6 @@ public interface Banner_IModel {
     void loadMore(int page,IBannerCallBack callBack);
 
     void Save(int id, IBannerCallBack bannerPresenter);
+
+    void unCollect(int id, IBannerCallBack bannerPresenter);
 }

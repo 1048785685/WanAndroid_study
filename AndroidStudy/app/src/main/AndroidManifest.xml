@@ -40,6 +40,8 @@
             android:launchMode="singleTask"/>
 
         <activity android:name=".ui.knowledge.Knowledge_Detail_Activity"/>
+
+        <activity android:name=".ui.main.activity.SearchActivity"/>
     </application>
 
 </manifest>

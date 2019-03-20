@@ -13,4 +13,6 @@ public interface IBannerView extends AbstractView {
     void showLoadMore(int page,List<Data_> list);
 
     void savesuccess();
+
+    void Cancel();
 }

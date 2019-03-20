@@ -11,4 +11,6 @@ public interface  IBannerCallBack {
     void successMain_Data(int page,List<Main_Banner> data ,List<Data_> list);
 
     void Savesuccess();
+
+    void Cancel();
 }

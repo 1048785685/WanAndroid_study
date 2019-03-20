@@ -62,7 +62,8 @@ public class Knowledge_RecyclerAdapter extends RecyclerView.Adapter<Knowledge_Re
     }
 
     public void  refreshData(List<Datum> data){
-        this.list = data;
+        list.clear();
+        list = data;
         notifyDataSetChanged();
     }
 

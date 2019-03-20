@@ -82,7 +82,6 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             ((ViewHolder)viewHolder).main_item_time.setText(Time.getTime("yyyy-MM-dd",mMainData.get(i-1).getPublishTime()));
             ((ViewHolder)viewHolder).main_item_title.setText(Html.fromHtml(mMainData.get(i-1).getTitle()));
             if (mMainData.get(i-1).getCollect()){
-                Log.d("xxx",mMainData.get(i-1).getTitle()+"            ");
                 ((ViewHolder) viewHolder).main_item_like.setImageResource(R.drawable.icon_like_selected);
             }else {
                 ((ViewHolder) viewHolder).main_item_like.setImageResource(R.drawable.icon_like_article_not_selected);
@@ -130,14 +129,14 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 main_item_like.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v){
-                        onRecyclerViewListener.onLikeClick(main_item_like,mMainData.get(getLayoutPosition()-1).getId());
+                        onRecyclerViewListener.onLikeClick(mMainData.get(getLayoutPosition()-1).getId()
+                                ,mMainData.get(getLayoutPosition()-1).getCollect());
                     }
                 });
                 itemView.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
-                        onRecyclerViewListener.onItemClick(mMainData.get(getLayoutPosition()-1).getLink(),
-                                String.valueOf(Html.fromHtml(mMainData.get(getLayoutPosition()-1).getTitle())));
+                        onRecyclerViewListener.onItemClick(getLayoutPosition()-1);
 
                     }
                 });
@@ -154,7 +153,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 banner.setOnBannerListener(new OnBannerListener() {
                     @Override
                     public void OnBannerClick(int position) {
-                        onRecyclerViewListener.onBannerClick(mData.get(position).getUrl(),mData.get(position).getTitle());
+                        onRecyclerViewListener.onBannerClick(position);
                     }
                 });
             }
@@ -172,9 +171,9 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public interface OnRecyclerViewListener{
-        void onItemClick(String url,String title);
-        void onLikeClick(ImageView imageView,int id);
-        void onBannerClick(String url,String title);
+        void onItemClick(int position);
+        void onLikeClick(int id,boolean isLike);
+        void onBannerClick(int position);
     }
     public void setOnRecycleViewListener(OnRecyclerViewListener itemClickListener){
         this.onRecyclerViewListener = itemClickListener;

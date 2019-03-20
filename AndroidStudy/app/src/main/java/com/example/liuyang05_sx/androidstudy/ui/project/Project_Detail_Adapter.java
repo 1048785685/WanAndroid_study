@@ -45,6 +45,11 @@ public class Project_Detail_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
             ((ViewHolder) viewHolder).item_project_detail_time_tv.setText(data.get(i).getNiceDate());
             ((ViewHolder) viewHolder).item_project_detail_title_tv.setText(Html.fromHtml(data.get(i).getTitle()));
             Glide.with(context).load(data.get(i).getEnvelopePic()).into(((ViewHolder) viewHolder).item_project_detail_iv);
+            if (data.get(i).getCollect()){
+                ((ViewHolder) viewHolder).item_project_detail_like.setImageResource(R.drawable.icon_like_selected);
+            }else {
+                ((ViewHolder) viewHolder).item_project_detail_like.setImageResource(R.drawable.icon_like_article_not_selected);
+            }
         }
     }
 
@@ -63,19 +68,28 @@ public class Project_Detail_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
         TextView item_project_detail_author_tv;
         @BindView(R.id.item_project_detail_time_tv)
         TextView item_project_detail_time_tv;
+        @BindView(R.id.item_project_detail_like)
+        ImageView item_project_detail_like;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+            item_project_detail_like.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clicklistener.proLike(data.get(getLayoutPosition()).getId(),
+                            data.get(getLayoutPosition()).getCollect());
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    clicklistener.proItemLisenter(data.get(getLayoutPosition()).getTitle(),
-                            data.get(getLayoutPosition()).getLink());
+                    clicklistener.proItemLisenter(getLayoutPosition(),data.get(getLayoutPosition()).getCollect());
                 }
             });
         }
     }
     public void replaceManiData(List<pro_Data_> list){
+        data.clear();
         data = list;
         notifyDataSetChanged();
     }
@@ -85,7 +99,8 @@ public class Project_Detail_Adapter extends RecyclerView.Adapter<RecyclerView.Vi
         notifyDataSetChanged();
     }
     interface ProjectClickListener{
-        void proItemLisenter(String title,String url);
+        void proItemLisenter(int position,boolean like);
+        void proLike(int id,boolean isLike);
     }
    public void setProClick(ProjectClickListener listener){
         this.clicklistener = listener;
