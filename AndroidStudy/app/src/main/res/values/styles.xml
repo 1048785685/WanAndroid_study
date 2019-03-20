@@ -17,6 +17,8 @@
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     
     <style name="Web_Toolbar" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
+
+
 </resources>

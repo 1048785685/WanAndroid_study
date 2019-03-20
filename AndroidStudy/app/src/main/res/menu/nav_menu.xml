@@ -21,7 +21,7 @@
          />
      <item
          android:id="@+id/nav_item_about"
-         android:title="关于我们"
+         android:title="关于此软件"
          android:icon="@drawable/ic_about"
          />
      <item

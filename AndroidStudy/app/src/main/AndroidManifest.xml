@@ -41,7 +41,11 @@
 
         <activity android:name=".ui.knowledge.Knowledge_Detail_Activity"/>
 
+
         <activity android:name=".ui.main.activity.SearchActivity"/>
+
+
+        <activity android:name=".ui.main.activity.AboutActivity"/>
     </application>
 
 </manifest>

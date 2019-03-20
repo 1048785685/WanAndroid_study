@@ -180,7 +180,11 @@ public class MainActivity extends BaseActivity {
                         mDrawerLayout.closeDrawers();
                         break;
                     case R.id.nav_item_about:
-                        menuItem.setChecked(true);
+                        menuItem.setCheckable(false);
+
+                        Intent intent = new Intent();
+                        intent.setClass(MainActivity.this,AboutActivity.class);
+                        startActivity(intent);
                         mDrawerLayout.closeDrawers();
 
                         break;
