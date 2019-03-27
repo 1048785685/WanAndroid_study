@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -30,7 +31,6 @@ import com.example.liuyang05_sx.androidstudy.ui.main.fragment.MainFragment;
 import com.example.liuyang05_sx.androidstudy.ui.navigation.NavigationFragment;
 import com.example.liuyang05_sx.androidstudy.ui.project.Project_fragment;
 import com.example.liuyang05_sx.androidstudy.ui.save.CollectActivity;
-import com.example.liuyang05_sx.androidstudy.ui.setting.Setting_fragment;
 import com.example.liuyang05_sx.androidstudy.ui.wx_article.Wx_Fragment;
 import com.example.liuyang05_sx.androidstudy.utils.ACache;
 import com.example.liuyang05_sx.androidstudy.utils.BottomNavigationViewHelper;
@@ -147,7 +147,14 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
-
+        MenuItem nightModeItem = mNav_view.getMenu().findItem(R.id.nav_item_night);
+        if (C.isNight) {
+            nightModeItem.setIcon(R.drawable.ic_day);
+            nightModeItem.setTitle("日间模式");
+        } else {
+            nightModeItem.setIcon(R.drawable.ic_night);
+            nightModeItem.setTitle("夜间模式");
+        }
         mNav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -173,11 +180,18 @@ public class MainActivity extends BaseActivity {
                         }
                         mDrawerLayout.closeDrawers();
                         break;
-                    case R.id.nav_item_setting:
-                        menuItem.setChecked(true);
-
-                        switchFragment("设置",5);
-                        mDrawerLayout.closeDrawers();
+                    case R.id.nav_item_night:
+                        menuItem.setCheckable(false);
+                        if (C.isNight) {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                            C.isNight=false;
+                            menuItem.setTitle("日间模式");
+                        } else {
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                            C.isNight=true;
+                            menuItem.setTitle("夜间模式");
+                        }
+                        Recreate();
                         break;
                     case R.id.nav_item_about:
                         menuItem.setCheckable(false);
@@ -197,6 +211,28 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
+    private void Recreate() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        if (mainFragment!=null){
+            transaction.remove(mainFragment);
+        }
+        if (knowledge_fragment!=null){
+            transaction.remove(knowledge_fragment);
+        }
+        if (wx_fragment!=null){
+            transaction.remove(wx_fragment);
+        }
+        if (navigationFragment!=null){
+            transaction.remove(navigationFragment);
+        }
+        if (project_fragment!=null){
+            transaction.remove(project_fragment);
+        }
+        transaction.commitAllowingStateLoss();
+        recreate();
+    }
+
     public void Login_out(){
         HttpHelperImp.httpHelperImp.Login_out()
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
@@ -287,7 +323,7 @@ public class MainActivity extends BaseActivity {
         mFragments.add(wx_fragment);
         mFragments.add(navigationFragment);
         mFragments.add(project_fragment);
-        mFragments.add(new Setting_fragment());
+
         switchFragment("首页",0);
     }
 }

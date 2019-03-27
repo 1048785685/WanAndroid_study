@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#3F9FE0</color>
+    <color name="colorPrimaryDark">#00000000</color>
+    <color name="colorAccent">@color/white</color>
     <color name="drawer_item_bg_n">#fffff9</color>
     <color name="white">#ffffff</color>
+    <color name="BottomNav">#3F9FE0</color>
     <color name="title_black">#222222</color>
     <color name="blue">#3F9FE0</color>
     <color name="delete_text">#cccccc</color>
@@ -13,4 +14,5 @@
     <color name="deep_grey">#dad9d9</color>
     <color name="colorBackground">#EEEEEE</color>
     <color name="main_status_bar_blue">#279ede</color>
+    <color name="transparent">#00000000</color>
 </resources>

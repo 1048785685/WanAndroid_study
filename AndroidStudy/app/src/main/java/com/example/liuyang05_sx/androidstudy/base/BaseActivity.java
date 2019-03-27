@@ -15,7 +15,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setStatusBarColor(R.color.blue);
+        setStatusBarColor(R.color.colorPrimaryDark);
     }
 
     private void setStatusBarColor(int color) {

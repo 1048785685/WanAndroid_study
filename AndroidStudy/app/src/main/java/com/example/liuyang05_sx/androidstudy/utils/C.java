@@ -5,4 +5,5 @@ public class C {
     public  static String PassWord = "";
     public  static String ARG_PARAM1 = "";
     public  static boolean isLogin = false;
+    public static boolean isNight=false;
 }

@@ -10,7 +10,7 @@
         android:id="@+id/navigation_TabLayout"
         android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:background="@color/blue"
+        android:background="?attr/colorPrimary"
         app:tab_height="50dp"
         app:indicator_color="@color/white"
         app:indicator_gravity="fill"

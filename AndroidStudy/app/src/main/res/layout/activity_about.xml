@@ -8,7 +8,7 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/blue"
+        android:background="?attr/colorPrimary"
         app:title="关于该软件"
         app:titleTextColor="@color/white"
         app:titleTextAppearance="@style/Web_Toolbar"
