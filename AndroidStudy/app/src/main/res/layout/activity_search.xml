@@ -1,23 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <android.support.design.widget.AppBarLayout
-        android:layout_height="wrap_content"
+    android:background="?attr/colorPrimaryDark"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_search" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/search_scroll_view"
         android:layout_width="match_parent"
-        >
-        <android.support.v7.widget.Toolbar
-            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-            android:background="?attr/colorPrimary"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:visibility="visible"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="发现更多内容"/>
-        </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
+                android:layout_marginBottom="8dp"
+                android:text="热门搜索"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/hot_search_flow_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:max_select="0" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp">
+
+                <TextView
+                    android:id="@+id/search_history_clear_all_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:drawablePadding="6dp"
+                    android:text="清除记录"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_toLeftOf="@+id/search_history_clear_all_tv"
+                    android:layout_toStartOf="@+id/search_history_clear_all_tv"
+                    android:text="搜索历史"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_history_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:background="?attr/colorPrimaryDark" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 </LinearLayout>
