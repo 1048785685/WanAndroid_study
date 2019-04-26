@@ -117,7 +117,9 @@ public class MainActivity extends BaseActivity {
         mSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("xxx","dianji search");
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,SearchActivity.class);
+                startActivity(intent);
             }
         });
 
